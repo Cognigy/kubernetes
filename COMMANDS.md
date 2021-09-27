@@ -31,7 +31,7 @@ kubectl create secret docker-registry cognigy-registry-token \
 **Creating random secrets for Kuberentes**
 ```
 cd kubernetes.git/core/<environment>/product
-wget https://github.com/Cognigy/kubernetes-tools/releases/download/v2.0.0/initialization-linux
+wget https://github.com/Cognigy/kubernetes-tools/releases/download/v2.2.0/initialization-linux
 chmod +x ./initialization-linux
 ./initialization-linux --generate
 ```
