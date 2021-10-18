@@ -116,10 +116,14 @@ kubectl logs -f --tail 100 deployment/service-security
 cd /path/to/your/theme
 
 kubectl create configmap theme-custom-config --from-file custom_config.json
+kubectl create configmap theme-custom-insightsapp-config --from-file custom_insightsApp_config.json
 
 kubectl create configmap theme-logo --from-file ./logo.png
 kubectl create configmap theme-logo-primary --from-file ./logo_primary.png
 kubectl create configmap theme-logo-square --from-file ./logo_square.png
+kubectl create configmap theme-logo-square-insights --from-file ./logo_square_insights.png
+kubectl create configmap theme-logo-square-user-menu --from-file ./logo_square_user_menu.png
+kubectl create configmap theme-logo-square-user-menu-insights --from-file ./logo_square_user_menu_insights.png
 
 kubectl create configmap theme-main-background --from-file ./main_background.png
 kubectl create configmap theme-static-content3 --from-file ./static_content3.png
@@ -161,6 +165,9 @@ kubectl create configmap theme-ms-icon-310x310 --from-file favicon/ms-icon-310x3
     - name: theme-custom-config
       mountPath: /app/build/custom/theme/custom_config.json
       subPath: custom_config.json
+    - name: theme-custom-insightsapp-config
+      mountPath: /app/build/custom/theme/custom_insightsApp_config.json
+      subPath: custom_insightsApp_config.json
     - name: theme-logo
       mountPath: /app/build/custom/theme/logo.png
       subPath: logo.png
@@ -170,6 +177,15 @@ kubectl create configmap theme-ms-icon-310x310 --from-file favicon/ms-icon-310x3
     - name: theme-logo-square
       mountPath: /app/build/custom/theme/logo_square.png
       subPath: logo_square.png
+    - name: theme-logo-square-insights
+      mountPath: /app/build/custom/theme/logo_square_insights.png
+      subPath: logo_square_insights.png
+    - name: theme-logo-square-user-menu
+      mountPath: /app/build/custom/theme/logo_square_user_menu.png
+      subPath: logo_square_user_menu.png
+    - name: theme-logo-square-user-menu-insights
+      mountPath: /app/build/custom/theme/logo_square_user_menu_insights.png
+      subPath: logo_square_user_menu_insights.png
     - name: theme-main-background
       mountPath: /app/build/custom/theme/main_background.png
       subPath: main_background.png
@@ -246,6 +262,9 @@ kubectl create configmap theme-ms-icon-310x310 --from-file favicon/ms-icon-310x3
     - name: theme-custom-config
       configMap:
         name: theme-custom-config
+    - name: theme-custom-insightsapp-config
+      configMap:
+        name: theme-custom-insightsapp-config
     - name: theme-logo
       configMap:
         name: theme-logo
@@ -255,6 +274,15 @@ kubectl create configmap theme-ms-icon-310x310 --from-file favicon/ms-icon-310x3
     - name: theme-logo-square
       configMap:
         name: theme-logo-square
+    - name: theme-logo-square-insights
+      configMap:
+        name: theme-logo-square-insights
+    - name: theme-logo-square-user-menu
+      configMap:
+        name: theme-logo-square-user-menu
+    - name: theme-logo-square-user-menu-insights
+      configMap:
+        name: theme-logo-square-user-menu-insights
     - name: theme-main-background
       configMap:
         name: theme-main-background
