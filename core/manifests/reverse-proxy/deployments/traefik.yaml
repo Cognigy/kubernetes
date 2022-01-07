@@ -15,7 +15,7 @@ spec:
             serviceAccount: traefik
             containers:
             - name: traefik
-              image: docker.cognigy.com:5000/traefik:1.7.26-alpine_non_priviledged
+              image: cognigy.azurecr.io/traefik:1.7.26-alpine_non_priviledged
               resources:
                 requests:
                     memory: "70Mi"
