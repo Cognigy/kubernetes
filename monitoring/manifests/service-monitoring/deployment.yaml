@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: service-monitoring
-        image: docker.cognigy.com:5000/service-monitoring:533ffd6e2cf917a044b9341bf27e8709e0b92367
+        image: cognigy.azurecr.io/service-monitoring:533ffd6e2cf917a044b9341bf27e8709e0b92367
         resources:
           requests:
             memory: "100Mi"

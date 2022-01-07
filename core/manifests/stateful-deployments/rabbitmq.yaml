@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: rabbitmq
-              image: docker.cognigy.com:5000/rabbitmq:3.8.3_cognigy-4.X
+              image: cognigy.azurecr.io/rabbitmq:3.8.3_cognigy-4.X
               resources:
                 limits:
                     memory: "2Gi"

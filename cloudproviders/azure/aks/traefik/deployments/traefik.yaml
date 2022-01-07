@@ -107,7 +107,7 @@ spec:
             serviceAccountName: traefik
             containers:
             - name: traefik
-              image: docker.cognigy.com:5000/traefik:1.7.26-alpine
+              image: cognigy.azurecr.io/traefik:1.7.26-alpine
               resources:
                 requests:
                     memory: "70Mi"
@@ -121,7 +121,7 @@ spec:
                 "--entryPoints=Name:http Address::80 Redirect.EntryPoint:https",
                 "--entryPoints=Name:https Address::443 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key TLS.MinVersion:VersionTLS12",
                 "--defaultentrypoints=http,https",
-                "--metrics.prometheus=true", 
+                "--metrics.prometheus=true",
                 "--logLevel=DEBUG"
               ]
               ports:
