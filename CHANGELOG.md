@@ -1,5 +1,9 @@
 # Release Notes
 
+## 4.17.0
+### Modification of files
+The referenced Docker images have been changed.
+
 ## 4.16.1
 ### Modification of files
 The referenced Docker images have been changed.
@@ -11,14 +15,12 @@ The "service-webchat" deployment has been modified. It will now also mount addit
 secrets. None of these secrets are new - so no additional secret has to be applied 
 to your Kubernetes cluster.
 
-
----
-
 ## 4.15.3
 ### Modification of files
 The referenced Docker images have been changed.
 
 
+---
 ---
 
 # 4.15.2
