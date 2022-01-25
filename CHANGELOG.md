@@ -1,8 +1,18 @@
 # Release Notes
 
-## 4.17.0
+## 4.17.1
 ### Modification of files
 The referenced Docker images have been changed.
+
+## 4.17.0
+### Modification of files
+### Core (Cognigy.AI)
+This release of Cognigy.AI prepares for a product which we plan to release later this year. We have introduced a new Kubernetes secret which you have to apply to your Kubernetes cluster. The secret is called `cognigy-live-agent-credentials.yaml` and located under `core/template.dist/product/secrets.dist`. We suggest copying this file from the `secrets.dist` folder into your `secrets` folders. The secret - by default - does not have a real value set.
+
+**Important**
+Not applying this secret into your cluster before upgrading to Cognigy.AI v4.17.0 will make `service-security` unavailable! Please be sure to apply the secret to your cluster before starting to upgrade to this new release.
+
+All referenced Docker images have been changed.
 
 ## 4.16.1
 ### Modification of files
