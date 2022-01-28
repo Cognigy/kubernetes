@@ -1,15 +1,15 @@
 # Introduction
 
-This file contains a general guideline to install Cognigy.AI version 4.X. 
+This file contains a general guideline to install Cognigy.AI version 4.X.
 
-## Cloning the Kubernetes repository 
+## Cloning the Kubernetes repository
 ```
 git clone https://github.com/Cognigy/kubernetes.git
 ```
 ## Configure volumes
 ### Creating storageclass
 
-We need to create a azure-file based storageclass with uid and gid 1000. To do so 
+We need to create a azure-file based storageclass with uid and gid 1000. To do so
 
 ```
 cd cloudproviders/azure/aks
@@ -34,7 +34,7 @@ chmod +x make_environment.sh
 
 ```
 kubectl create secret docker-registry cognigy-registry-token \
---docker-server=docker.cognigy.com:5000 \
+--docker-server=cognigy.azurecr.io \
 --docker-username=<your-username> \
 --docker-password='<your-password>'
 ```
@@ -55,14 +55,14 @@ kubectl apply -f secrets
 ```
 ## Database, Message-Broker and Cache
 
-At this point we are going to deploy all product dependecies. We need to add one more patch for mongo deployment which we dont need to do in single server setup. To do so 
+At this point we are going to deploy all product dependecies. We need to add one more patch for mongo deployment which we dont need to do in single server setup. To do so
 
 ```
 cd kubernetes.git/core/<environment>/dependencies/overlays
 mkdir stateful-deployments
 touch mongo-server_patch.yaml
 ```
-After that copy the content from `kubernetes/cloudproviders/azure/aks/mongo-server_patch.yaml` and paste into the file which you just created. 
+After that copy the content from `kubernetes/cloudproviders/azure/aks/mongo-server_patch.yaml` and paste into the file which you just created.
 
 We also need to modify the kustomization file as we already created all PVC and we are adding a new patch for mongo. At the end the content of the `kubernetes.git/core/<environment>/dependencies/kustomization.yaml` will be following
 
@@ -101,7 +101,7 @@ patchesJson6902:
     name: mongo-server
   path: overlays/stateful-deployments/mongo-server_patch.yaml
 ```
-After modifying the kustomization you need to apply it 
+After modifying the kustomization you need to apply it
 
 ```
 cd kubernetes.git/core/<environment>/dependencies

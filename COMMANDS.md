@@ -22,7 +22,7 @@ chmod +x make_environment.sh
 **Creating the image pull secret**
 ```
 kubectl create secret docker-registry cognigy-registry-token \
---docker-server=docker.cognigy.com:5000 \
+--docker-server=cognigy.azurecr.io \
 --docker-username=<your-username> \
 --docker-password='<your-password>'
 ```
