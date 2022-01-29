@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: cognigy.azurecr.io/service-endpoint:0cc704abbd13770768e5ec8818df6d3d6988270f
+          image: cognigy.azurecr.io/service-endpoint:e3c4e7a0b0ca5c65b028dad2f0f1a66e5e336062
           resources:
             requests:
               cpu: '0.2'
