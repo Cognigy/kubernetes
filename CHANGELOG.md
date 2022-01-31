@@ -7,6 +7,9 @@ This release changes our `Socket Endpoint` which is e.g. used for the Interactio
 **Important**
 If you are using the `ENDPOINT_CORS_WHITELIST` configuration option, you have to make sure that you whitelist all domains on which you have embedded our WebchatWidget.
 
+### General
+In addition we have changed the referenced container registry in various files in this repository. Our container registry for production container images now is `cognigy.azurecr.io` instead of `docker.cognigy.com:5000`. We have announced this changed already a couple of months ago and our main manifests for Cognigy.AI have been using the new container registry since a couple of release. We just want to mention this once again for transparency reasons.
+
 ## 4.17.1
 ### Modification of files
 The referenced Docker images have been changed.
