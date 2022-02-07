@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: live-agent-api
-          image: cognigy.azurecr.io/live-agent-api:49120040ac4bd68a2a03175bbe2a5cd334285339
+          image: cognigy.azurecr.io/live-agent-api:1cebd909d432222d0a328577be02a5c19e90cbef
           resources:
             requests:
               cpu: '0.1'
