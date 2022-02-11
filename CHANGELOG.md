@@ -1,5 +1,9 @@
 # Release Notes
 
+## 4.18.2
+### Modification of files
+The referenced container images changed.
+
 ## 4.18.1
 ### Modification of files
 The referenced Docker images have been changed.
