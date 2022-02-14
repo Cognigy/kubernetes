@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-logs
-          image: cognigy.azurecr.io/service-logs:531cbe56885decec3c86f4096f8f25ffd7d8be2b
+          image: cognigy.azurecr.io/service-logs:db8593bc35853477b742a692164a949df4c30ada
           resources:
             requests:
               cpu: '0.1'
@@ -28,6 +28,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: FEATURE_USE_NEW_PAGINATION_PLUGIN
+              value: 'true'
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
