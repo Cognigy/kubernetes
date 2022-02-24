@@ -1,0 +1,35 @@
+#
+# Be sure that the 'metrics server' has been installed!
+#
+# Check GitHub:
+# https://github.com/kubernetes-sigs/metrics-server
+#
+# Installation
+# kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml --kubelet-insecure-tls
+#
+# Once the 'metrics-server' Deployment is up (see kube-system namespace!),
+# you have to add the following argument to the deployment:
+# '--kubelet-insecure-tls' - otherwise the metrics-server will not be able
+# to properly work on your microk8s cluster!
+#
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: service-playbook-execution
+spec:
+  #
+  # Reference to the 'service-playbook-execution' deployment
+  #
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: service-playbook-execution
+  minReplicas: 1
+  maxReplicas: 6
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
