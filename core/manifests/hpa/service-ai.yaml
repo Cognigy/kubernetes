@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: service-ai
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: service-ai
+    apiVersion: apps/v1
+  minReplicas: 4
+  maxReplicas: 15
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 65

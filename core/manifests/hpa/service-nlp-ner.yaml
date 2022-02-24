@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: service-nlp-ner
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: service-nlp-ner
+    apiVersion: apps/v1
+  minReplicas: 4
+  maxReplicas: 16
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 80
