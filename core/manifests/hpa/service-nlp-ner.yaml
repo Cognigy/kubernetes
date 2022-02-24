@@ -1,3 +1,4 @@
+# This file should not be used in production
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
