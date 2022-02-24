@@ -1,0 +1,17 @@
+# This file should not be used in production
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: service-ai
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: service-ai
+    apiVersion: apps/v1
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 65
