@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-profiles
-          image: cognigy.azurecr.io/service-profiles:72cabbc90c45171dbfc57f556d48b8ae5cbb653a
+          image: cognigydevelopment.azurecr.io/service-profiles:72cabbc90c45171dbfc57f556d48b8ae5cbb653a
           resources:
             requests:
               cpu: '0.1'
