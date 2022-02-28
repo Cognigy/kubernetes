@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-function-execution
-          image: cognigydevelopment.azurecr.io/service-function-execution:de9df6734a7862bd072b4edda9ace207e13c6ed0
+          image: cognigy.azurecr.io/service-function-execution:3c498e40da02a597d66fa50cf973bd81213d56e4
           resources:
             requests:
               cpu: '1'
