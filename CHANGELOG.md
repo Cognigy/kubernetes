@@ -1,11 +1,8 @@
 # Release Notes
 
 ## 4.20.0
-### Core (Cognigy.AI)
-This release activates `nlp-matcher` as a component used for Lexicon-Keyphrase matching. This microservice is already present for
-quite some time, but was an opt-in until now. Please make sure that `service-nlp-matcher` is running in your Kubernetes cluster
-in order to make sure that Keyphrase detection works properly. Please note that the new matcher component won't be used unless
-you re-train your Intent models in your Flows.
+### Modification of files
+The referenced container images changed.
 
 ## 4.19.1
 ### Modification of files
