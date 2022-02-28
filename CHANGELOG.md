@@ -7,9 +7,6 @@ quite some time, but was an opt-in until now. Please make sure that `service-nlp
 in order to make sure that Keyphrase detection works properly. Please note that the new matcher component won't be used unless
 you re-train your Intent models in your Flows.
 
-### Modification of files
-The referenced container images changed.
-
 ## 4.19.1
 ### Modification of files
 The referenced container images changed.
