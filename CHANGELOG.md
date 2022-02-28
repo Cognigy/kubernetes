@@ -1,5 +1,9 @@
 # Release Notes
 
+## 4.20.0
+### Modification of files
+The referenced container images changed.
+
 ## 4.19.1
 ### Modification of files
 The referenced container images changed.
