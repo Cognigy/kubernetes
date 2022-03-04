@@ -27,7 +27,7 @@ spec:
     - type: Resource
       resource:
         name: cpu        
-        targetAverageUtilization: 50
+        targetAverageUtilization: 80
     - type: Pods
       pods:
         metricName: cognigy_playbook_execution_load
