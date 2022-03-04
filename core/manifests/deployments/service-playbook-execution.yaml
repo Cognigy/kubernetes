@@ -30,7 +30,11 @@ spec:
                 name: cognigy-env
           volumeMounts:
             - name: rabbitmq-connection-string
-              mountPath: /var/run/secrets
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
           startupProbe:
             httpGet:
               path: /health/startup
@@ -50,5 +54,8 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token
