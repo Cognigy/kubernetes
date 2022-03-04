@@ -12,14 +12,11 @@
 # '--kubelet-insecure-tls' - otherwise the metrics-server will not be able
 # to properly work on your microk8s cluster!
 #
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
   name: service-playbook-execution
-spec:
-  #
-  # Reference to the 'service-playbook-execution' deployment
-  #
+spec:  
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
@@ -29,7 +26,9 @@ spec:
   metrics:
     - type: Resource
       resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 50
+        name: cpu        
+        targetAverageUtilization: 50
+    - type: Pods
+      pods:
+        metricName: cognigy_playbook_execution_load
+        targetAverageValue: "80"
