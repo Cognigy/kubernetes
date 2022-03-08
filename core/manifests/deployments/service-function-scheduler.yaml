@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-function-scheduler
-          image: cognigydevelopment.azurecr.io/service-function-scheduler:319e771fa21f008f7f78e7f3fc5e2f37832a491e
+          image: cognigydevelopment.azurecr.io/service-function-scheduler:fabe7fd5560192c597d6c08c4e710729c4c3b47e
           resources:
             requests:
               cpu: '0.1'
