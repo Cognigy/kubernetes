@@ -41,6 +41,7 @@ chmod +x ./initialization-linux
 kubectl apply -f secrets
 ```
 
+### 3.4 Storage
 ### 3.4.1 Storage for EKS installations
 
 On EKS we can use EBS and EFS as storage. EBS is for the RWO operation and EFS is for RWX. So in this case `EBS` will be used by MongoDB and Redis-Persistent and `EFS` will be used by flow modules and functions.
