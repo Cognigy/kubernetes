@@ -41,6 +41,24 @@ chmod +x ./initialization-linux
 kubectl apply -f secrets
 ```
 
+### 3.4.1 Storage for EKS installations
+
+On EKS we can use EBS and EFS as storage. EBS is for the RWO operation and EFS is for RWX. So in this case `EBS` will be used by MongoDB and Redis-Persistent and `EFS` will be used by flow modules and functions.
+
+<em>Important note: Please make sure that two EFS volumes are mounted in the EKS cluster</em>
+
+**Creating EFS and EBS storage**
+
+```
+cd kubernetes.git/cloudprovides/aws
+chmod +x efs_generator.sh
+sh efs_generator.sh
+
+// Enter the EFS id for flow-modules and functions and also the AWS region
+
+kubectl apply -k ./
+```
+
 ### 3.4.2 Storage for single server installations
 **Creating directories for local storage**
 ```
@@ -55,7 +73,66 @@ sudo chown -R 1000:1000 /var/opt/cognigy/functions
 ```
 
 ### 3.5 Database, Message-Broker and Cache
-**Deploying our products dependencies**
+### 3.5.1 Deploying our products dependencies on EKS
+
+At first you need to add a patch to allow mongodb to write data in EBS. To do so 
+
+```
+cd kubernetes.git/core/<environment>/dependencies/overlays
+mkdir stateful-deployments
+touch mongo-server_patch.yaml
+```
+After that copy the content from `kubernetes/cloudproviders/aws/mongo-server_patch.yaml` and paste into the file which you just created.
+
+Now you need to modify the kustomization file to able to deploy on EKS. The `kustomization.yaml` will looks like below
+
+```
+# ----------------------------------------------------
+# apiVersion and kind of Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Adds namespace to all resources.
+namespace: default
+
+resources:
+# storage: persistent volume claims
+- manifests/volume-claims/mongodb.yaml
+- manifests/volume-claims/redis-persistent.yaml
+
+# configmaps
+- manifests/config-maps/redis.yaml
+- manifests/config-maps/redis-persistent.yaml
+
+# services
+- manifests/services/stateful-mongo-server.yaml
+- manifests/services/stateful-rabbitmq.yaml
+- manifests/services/stateful-redis.yaml
+- manifests/services/stateful-redis-persistent.yaml
+
+# deployments
+- manifests/stateful-deployments/mongo-server.yaml
+- manifests/stateful-deployments/rabbitmq.yaml
+- manifests/stateful-deployments/redis.yaml
+- manifests/stateful-deployments/redis-persistent.yaml
+
+patchesJson6902:
+# storage: persistent volumes
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: mongo-server
+  path: overlays/stateful-deployments/mongo-server_patch.yaml
+```
+Then deploy the dependencies
+
+```
+cd kubernetes.git/core/<environment>/dependencies
+kubectl apply -k ./
+```
+### 3.5.2 Deploying our products dependencies on single server
+
 ```
 cd kubernetes.git/core/<environment>/dependencies
 kubectl apply -k ./
