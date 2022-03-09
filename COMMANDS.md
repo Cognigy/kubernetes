@@ -58,8 +58,14 @@ sh efs_generator.sh
 
 kubectl apply -k ./
 ```
+### 3.4.2 Storage for AKS installations
+**Creating storage for MongoDB and Redispersistent**
 
-### 3.4.2 Storage for single server installations
+```
+cd kubernetes.git/cloudproviders/aks
+kubectl apply -k ./
+```
+### 3.4.3 Storage for single server installations
 **Creating directories for local storage**
 ```
 sudo mkdir -p /var/opt/cognigy/mongodb
@@ -131,7 +137,62 @@ Then deploy the dependencies
 cd kubernetes.git/core/<environment>/dependencies
 kubectl apply -k ./
 ```
-### 3.5.2 Deploying our products dependencies on single server
+### 3.5.2 Deploying our products dependencies on AKS
+
+At first you need to add a patch to allow mongodb to write data in Azure storage. To do so 
+
+```
+cd kubernetes.git/core/<environment>/dependencies/overlays
+mkdir stateful-deployments
+touch mongo-server_patch.yaml
+```
+After that copy the content from `kubernetes/cloudproviders/azure/mongo-server_patch.yaml` and paste into the file which you just created.
+
+Now you need to modify the kustomization file to able to deploy on AKS. The `kustomization.yaml` will looks like below
+
+```
+# ----------------------------------------------------
+# apiVersion and kind of Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Adds namespace to all resources.
+namespace: default
+
+resources:
+
+# configmaps
+- manifests/config-maps/redis.yaml
+- manifests/config-maps/redis-persistent.yaml
+
+# services
+- manifests/services/stateful-mongo-server.yaml
+- manifests/services/stateful-rabbitmq.yaml
+- manifests/services/stateful-redis.yaml
+- manifests/services/stateful-redis-persistent.yaml
+
+# deployments
+- manifests/stateful-deployments/mongo-server.yaml
+- manifests/stateful-deployments/rabbitmq.yaml
+- manifests/stateful-deployments/redis.yaml
+- manifests/stateful-deployments/redis-persistent.yaml
+
+patchesJson6902:
+# storage: persistent volumes
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: mongo-server
+  path: overlays/stateful-deployments/mongo-server_patch.yaml
+```
+Then deploy the dependencies
+
+```
+cd kubernetes.git/core/<environment>/dependencies
+kubectl apply -k ./
+```
+### 3.5.3 Deploying our products dependencies on single server
 
 ```
 cd kubernetes.git/core/<environment>/dependencies

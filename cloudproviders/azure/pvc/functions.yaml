@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: flow-modules
+  name: functions
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: ""
+  storageClassName: functions
   resources:
     requests:
-      storage: 1Mi
+      storage: 100Gi

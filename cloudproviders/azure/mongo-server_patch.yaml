@@ -1,5 +1,5 @@
 - op: add
   path: /spec/template/spec/securityContext
   value:
-    runAsUser: 0
-    runAsGroup: 0
+    runAsUser: 999
+    runAsGroup: 999
