@@ -199,7 +199,7 @@ cd kubernetes.git/core/<environment>/dependencies
 kubectl apply -k ./
 ```
 
-**Initializing a replica-set and creating databases with users**
+**Initializing a replica-set and creating databases with users(applicable for EKS/AKS/single server)**
 ```
 kubectl exec -it deployment/mongo-server -- sh
 mongo -u admin -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin
