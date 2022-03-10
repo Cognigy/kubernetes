@@ -18,31 +18,31 @@ spec:
       - name: redis-persistent
         image: cognigy.azurecr.io/redis:5.0.8_cognigy_4.X
         resources:
-        limits:
-          memory: "512Mi"
-          cpu: "500m"
-        requests:
-          memory: "100Mi"
-          cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "100Mi"
+            cpu: "200m"
         ports:
         - containerPort: 6379
         volumeMounts:
         - name: redis-data
-        mountPath: /data
+          mountPath: /data
         - name: redis-password-config
-        mountPath: /var/run/secrets/
+          mountPath: /var/run/secrets/
         - name: redis-persistent-config
-        mountPath: /var/run/config
+          mountPath: /var/run/config
       volumes:
       - name: redis-password-config
         secret:
-        secretName: cognigy-redis-persistent-password
-        items:
-        - key: redis-persistent-password.conf
-          path: redis-password.conf
+          secretName: cognigy-redis-persistent-password
+          items:
+          - key: redis-persistent-password.conf
+            path: redis-password.conf
       - name: redis-persistent-config
         configMap:
-        name: redis-persistent
+          name: redis-persistent
       - name: redis-data
         persistentVolumeClaim:
           claimName: redis-persistent
