@@ -17,10 +17,10 @@ spec:
           image: cognigydevelopment.azurecr.io/service-nlp-ner:f6f13fa59547d4defa167c9ae2ca4aa306f94e1f
           resources:
             requests:
-              cpu: '0.3'
+              cpu: "0.3"
               memory: 100M
             limits:
-              cpu: '1.0'
+              cpu: "1.0"
               memory: 150M
           ports:
             - name: metrics
@@ -35,11 +35,14 @@ spec:
             - name: rabbitmq-api-connection-string
               mountPath: /var/run/secrets/rabbitmqAPIConnectionString
               subPath: rabbitmqAPIConnectionString
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /health/liveness
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
