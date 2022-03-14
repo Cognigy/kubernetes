@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-nlp-ner
-          image: cognigydevelopment.azurecr.io/service-nlp-ner:f6f13fa59547d4defa167c9ae2ca4aa306f94e1f
+          image: cognigydevelopment.azurecr.io/service-nlp-ner:4d12862f6e36f9e44f95ca1274d080487dc928be
           resources:
             requests:
-              cpu: "0.3"
+              cpu: '0.3'
               memory: 100M
             limits:
-              cpu: "1.0"
+              cpu: '1.0'
               memory: 150M
           ports:
             - name: metrics
