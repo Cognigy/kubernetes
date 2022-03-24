@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-security
-          image: cognigydevelopment.azurecr.io/service-security:b6bf98bc90c0ed3920bb86b5e2ca464009dab908
+          image: cognigydevelopment.azurecr.io/service-security:29ae14b40fd0fbd3fdfb9dd135207675fb7d3cb9
           resources:
             requests:
               cpu: '0.2'
