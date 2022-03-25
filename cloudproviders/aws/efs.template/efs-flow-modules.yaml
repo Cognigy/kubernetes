@@ -1,8 +1,11 @@
+apiVersion: apps/v1
 kind: Deployment
-apiVersion: extensions/v1beta1
 metadata:
   name: efs-provisioner-flow-modules
 spec:
+  selector:
+    matchLabels:
+      app: efs-provisioner-flow-modules
   replicas: 1
   strategy:
     type: Recreate 
@@ -12,22 +15,26 @@ spec:
         app: efs-provisioner-flow-modules
     spec:
       containers:
-        - name: efs-provisioner-flow-modules
-          image: quay.io/external_storage/efs-provisioner:latest
-          env:
-            - name: FILE_SYSTEM_ID
-              value: "fs-f9c496a0"
-            - name: AWS_REGION
-              value: "eu-central-1"
-            - name: PROVISIONER_NAME
-              value: "efs-provisioner-flow-modules"
-          volumeMounts:
-            - name: pv-volume
-              mountPath: /persistentvolumes
+      - name: efs-provisioner-flow-modules
+        image: quay.io/external_storage/efs-provisioner:latest
+        resources:
+          limits:
+            memory: "200Mi"
+            cpu: "100m"
+        env:
+          - name: FILE_SYSTEM_ID
+            value: "flow-module-file-system"
+          - name: AWS_REGION
+            value: "region"
+          - name: PROVISIONER_NAME
+            value: "efs-provisioner-flow-modules"
+        volumeMounts:
+          - name: pv-volume
+            mountPath: /persistentvolumes
       volumes:
         - name: pv-volume
           nfs:
-            server: fs-f9c496a0.efs.eu-central-1.amazonaws.com
+            server: flow-module-file-system.efs.region.amazonaws.com
             path: /
 ---
 kind: PersistentVolumeClaim
