@@ -1,25 +1,23 @@
+---
 apiVersion: v1
 kind: Service
 metadata:
-    name: traefik
-    labels:
-        app: traefik
+  name: traefik
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik
+  annotations:
 spec:
-    ports:
-    - name: traefik-http
-      port: 80
-      targetPort: 8000
-      protocol: TCP
-    - name: traefik-https
-      port: 443
-      targetPort: 4430
-      protocol: TCP
-    - protocol: TCP
-      port: 8080
-      name: admin
-    externalIPs:
-      # Change me!
-      -
-    type: LoadBalancer
-    selector:
-        app: traefik
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik
+  ports:
+  - port: 80
+    name: web
+    targetPort: "web"
+    protocol: TCP
+  - port: 443
+    name: websecure
+    targetPort: "websecure"
+    protocol: TCP
