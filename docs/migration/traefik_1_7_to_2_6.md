@@ -55,7 +55,7 @@ helm show values traefik/traefik --version $TRAEFIK_CHART_VERSION > traefik.helm
 helm -n $NAMESPACE upgrade --install traefik traefik/traefik -f traefik.helm/default.values.yaml -f traefik.helm/values.yaml
 ```
 
-- Apply the new `Service` resources and the new `Ingress` resources:
+- Apply the new `Service` and `Ingress` resources:
 
 ```bash
 cd kubernetes.git/core/<environment>/product
@@ -77,3 +77,12 @@ kubectl annotate service traefik service.beta.kubernetes.io/aws-load-balancer-pr
 ```
 
 ## Continue using Kustomization
+
+If you want to continue using Kustomization to deploy Traefik, you only need to delete the `traefik` deployment and redeploy:
+
+```bash
+kubectl delete deployment traefik
+
+cd kubernetes.git/core/<environment>/product
+kubectl apply -k ./
+```
