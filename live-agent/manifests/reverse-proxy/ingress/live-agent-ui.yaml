@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: live-agent-ui
@@ -9,7 +9,10 @@ spec:
   - host: live-agent-ui
     http:
       paths:
-      - path: /
-        backend:
-          serviceName: live-agent-ui
-          servicePort: 8000
+      - backend:
+          service:
+            name: live-agent-ui
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix
