@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-realtime
-          image: cognigydevelopment.azurecr.io/service-analytics-realtime:be2c3af0865933552a7267db65b3e1a4c42256b2
+          image: cognigydevelopment.azurecr.io/service-analytics-realtime:8cbd67b7eb4c714ad7740db3c5339a79236f61cf
           resources:
             requests:
               cpu: '0.1'
