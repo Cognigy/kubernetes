@@ -56,8 +56,7 @@ resources:
 - manifests/deployments/service-journeys.yaml
 - manifests/deployments/service-logs.yaml
 - manifests/deployments/service-nlp-ner.yaml
-# service-nlp-matcher is opt-in:
-# - manifests/deployments/service-nlp-matcher.yaml
+- manifests/deployments/service-nlp-matcher.yaml
 - manifests/deployments/service-parser.yaml
 - manifests/deployments/service-playbook-execution.yaml
 - manifests/deployments/service-profiles.yaml
