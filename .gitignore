@@ -28,3 +28,4 @@ initialization
 # ignore efs
 
 efs/*
+.history
