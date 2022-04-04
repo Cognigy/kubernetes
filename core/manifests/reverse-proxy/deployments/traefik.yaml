@@ -82,8 +82,6 @@ spec:
           - name: tmp
             mountPath: /tmp
         args:
-          - "--global.checknewversion"
-          - "--global.sendanonymoususage"
           - "--entrypoints.metrics.address=:9100/tcp"
           - "--entrypoints.traefik.address=:9000/tcp"
           - "--entrypoints.web.address=:8000/tcp"
