@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-de
-          image: cognigydevelopment.azurecr.io/service-nlp:d83eefb24a1b425301ad66540ea38c9749f7bb8b
+          image: cognigydevelopment.azurecr.io/service-nlp:1259f9b42b6dc43d914d0ee4380f21ec1e22d594
           resources:
             requests:
               cpu: '0.350'
