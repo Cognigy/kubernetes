@@ -1,5 +1,12 @@
-# 4.22.0
+# 4.22.2
+## Cognigy.AI (core)
+The referenced container images have changed.
 
+# 4.22.1
+## Cognigy.AI (core)
+The referenced container images have changed.
+
+# 4.22.0
 ## Cognigy.AI (core)
 The referenced container images have changed.
 
