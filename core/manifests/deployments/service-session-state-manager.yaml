@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-state-manager
+  name: service-session-state-manager
 spec:
   selector:
     matchLabels:
-      app: service-state-manager
+      app: service-session-state-manager
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-state-manager
+        app: service-session-state-manager
     spec:
       containers:
-        - name: service-state-manager
-          image: cognigydevelopment.azurecr.io/service-state-manager:f60d1c0028a0d6910968978fd647d5082a4184ee
+        - name: service-session-state-manager
+          image: cognigydevelopment.azurecr.io/service-session-state-manager:f60d1c0028a0d6910968978fd647d5082a4184ee
           resources:
             requests:
               cpu: '0.1'
@@ -59,7 +59,7 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-state-manager
+            secretName: cognigy-service-session-state-manager
             items:
               - key: connection-string
                 path: mongodbConnectionString
