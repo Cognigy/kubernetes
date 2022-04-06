@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-analytics-collector
+  name: service-playbook-execution
 spec:
   selector:
     matchLabels:
-      app: service-analytics-collector
+      app: service-playbook-execution
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-analytics-collector
+        app: service-playbook-execution
     spec:
       containers:
-        - name: service-analytics-collector
-          image: cognigy.azurecr.io/service-analytics-collector:5e7ee500b437d6af1f519df73a651104a4372705
+        - name: service-playbook-execution
+          image: cognigy.azurecr.io/service-playbook-execution:5e7ee500b437d6af1f519df73a651104a4372705
           resources:
             requests:
-              cpu: '0.300'
-              memory: 160M
+              cpu: '0.1'
+              memory: 60M
             limits:
-              cpu: '0.300'
-              memory: 200M
+              cpu: '0.1'
+              memory: 75M
           ports:
             - name: metrics
               containerPort: 8002
@@ -32,17 +32,17 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
-            - name: mongodb-connection-string
-              mountPath: /var/run/secrets/mongodbConnectionString
-              subPath: mongodbConnectionString
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /health/liveness
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
@@ -54,12 +54,6 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: mongodb-connection-string
-          secret:
-            secretName: cognigy-service-analytics-collector-provider
-            items:
-              - key: connection-string
-                path: mongodbConnectionString
         - name: redis-password
           secret:
             secretName: cognigy-redis-password

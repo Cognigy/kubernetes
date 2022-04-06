@@ -58,6 +58,7 @@ resources:
 - manifests/deployments/service-nlp-ner.yaml
 - manifests/deployments/service-nlp-matcher.yaml
 - manifests/deployments/service-parser.yaml
+- manifests/deployments/service-playbook-execution.yaml
 - manifests/deployments/service-profiles.yaml
 - manifests/deployments/service-resources.yaml
 - manifests/deployments/service-security.yaml
