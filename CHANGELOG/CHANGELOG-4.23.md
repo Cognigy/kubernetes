@@ -13,3 +13,6 @@ Please have a look at the adjusted ``kustomization.yaml`` file located under ``c
 ```
 
 Please apply the same change to your own copy of ``kustomization.yaml`` in order to ensure that this new microservice will be started when updating to Cognigy.AI v4.23.0
+
+## Cloudproviders files
+With this release we have also restructured the files located under the ``cloudproviders`` folder. These files are used when deploying Cognigy.AI on top of AWS EKS or Azure AKS. In case of questions, please get in touch with us.
