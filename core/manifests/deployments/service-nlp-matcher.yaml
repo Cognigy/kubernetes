@@ -63,4 +63,4 @@ spec:
           secret:
             secretName: cognigy-redis-persistent-password
       imagePullSecrets:
-        - name: cognigy-registry-token
+        - name: cognigy-registry-token-dev

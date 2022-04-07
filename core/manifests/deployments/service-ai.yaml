@@ -87,4 +87,4 @@ spec:
           persistentVolumeClaim:
             claimName: flow-modules
       imagePullSecrets:
-        - name: cognigy-registry-token
+        - name: cognigy-registry-token-dev

@@ -97,4 +97,4 @@ spec:
           secret:
             secretName: cognigy-management-ui-creds
       imagePullSecrets:
-        - name: cognigy-registry-token
+        - name: cognigy-registry-token-dev

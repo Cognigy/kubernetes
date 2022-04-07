@@ -64,4 +64,4 @@ spec:
               - key: connection-string
                 path: mongodbConnectionString
       imagePullSecrets:
-        - name: cognigy-registry-token
+        - name: cognigy-registry-token-dev

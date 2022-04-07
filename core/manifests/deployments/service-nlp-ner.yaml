@@ -61,4 +61,4 @@ spec:
               - key: connection-string-api
                 path: rabbitmqAPIConnectionString
       imagePullSecrets:
-        - name: cognigy-registry-token
+        - name: cognigy-registry-token-dev
