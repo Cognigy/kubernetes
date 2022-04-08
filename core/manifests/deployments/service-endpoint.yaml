@@ -80,4 +80,4 @@ spec:
               - key: connection-string
                 path: rabbitmqConnectionString
       imagePullSecrets:
-        - name: cognigy-registry-token-dev
+        - name: cognigy-registry-token
