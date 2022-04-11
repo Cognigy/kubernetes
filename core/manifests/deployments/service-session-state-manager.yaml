@@ -59,7 +59,8 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-session-state-manager
+          # we point to the service-ai db
+            secretName: cognigy-service-ai
             items:
               - key: connection-string
                 path: mongodbConnectionString
