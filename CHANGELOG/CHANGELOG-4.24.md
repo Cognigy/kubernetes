@@ -1,6 +1,6 @@
 # 4.24.0
 ## Cognigy.AI (core)
-This release does not only change the referenced container images, but also brings a new microservice called ``service-session-state-management``. In order for all of this to work properly, we have to do the following step:
+This release does not only change the referenced container images, but also brings a new microservice called ``service-session-state-manager``. In order for all of this to work properly, we have to do the following step:
 - modify the kustomization.yaml in our product(s) folder(s) so the new microservice will be started
 
 ### Adjustments in kustomization.yaml
