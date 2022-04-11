@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-task-manager
-          image: cognigydevelopment.azurecr.io/service-task-manager:7e4ed91376c98a15586acb2122bf6567fcf348a8
+          image: cognigydevelopment.azurecr.io/service-task-manager:24cb47570d34444889a477fccfa13cefc9178896
           resources:
             requests:
               cpu: '0.1'

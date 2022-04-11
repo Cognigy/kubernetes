@@ -17,11 +17,11 @@ spec:
           image: cognigydevelopment.azurecr.io/service-session-state-manager:f60d1c0028a0d6910968978fd647d5082a4184ee
           resources:
             requests:
-              cpu: '0.1'
-              memory: 60M
+              cpu: '0.4'
+              memory: 400M
             limits:
-              cpu: '0.1'
-              memory: 75M
+              cpu: '0.4'
+              memory: 500M
           ports:
             - name: metrics
               containerPort: 8002

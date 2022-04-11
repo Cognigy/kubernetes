@@ -24,3 +24,7 @@ core/local-deployments
 
 # do not track the "initializatin" binary
 initialization
+
+# ignore efs
+
+efs/*

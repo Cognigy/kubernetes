@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-ner
+  name: service-playbook-execution
 spec:
   selector:
     matchLabels:
-      app: service-nlp-ner
+      app: service-playbook-execution
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-ner
+        app: service-playbook-execution
     spec:
       containers:
-        - name: service-nlp-ner
-          image: cognigydevelopment.azurecr.io/service-nlp-ner:24cb47570d34444889a477fccfa13cefc9178896
+        - name: service-playbook-execution
+          image: cognigydevelopment.azurecr.io/service-playbook-execution:24cb47570d34444889a477fccfa13cefc9178896
           resources:
             requests:
-              cpu: '0.3'
-              memory: 100M
+              cpu: '0.1'
+              memory: 60M
             limits:
-              cpu: '1.0'
-              memory: 150M
+              cpu: '0.1'
+              memory: 75M
           ports:
             - name: metrics
               containerPort: 8002
@@ -32,9 +32,9 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
-            - name: rabbitmq-api-connection-string
-              mountPath: /var/run/secrets/rabbitmqAPIConnectionString
-              subPath: rabbitmqAPIConnectionString
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
           startupProbe:
             httpGet:
               path: /health/startup
@@ -54,11 +54,8 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: rabbitmq-api-connection-string
+        - name: redis-password
           secret:
-            secretName: cognigy-rabbitmq
-            items:
-              - key: connection-string-api
-                path: rabbitmqAPIConnectionString
+            secretName: cognigy-redis-password
       imagePullSecrets:
         - name: cognigy-registry-token
