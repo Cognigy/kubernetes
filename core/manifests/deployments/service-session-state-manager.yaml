@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-session-state-manager
+spec:
+  selector:
+    matchLabels:
+      app: service-session-state-manager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-session-state-manager
+    spec:
+      containers:
+        - name: service-session-state-manager
+          image: cognigydevelopment.azurecr.io/service-session-state-manager:f60d1c0028a0d6910968978fd647d5082a4184ee
+          resources:
+            requests:
+              cpu: '0.4'
+              memory: 400M
+            limits:
+              cpu: '0.4'
+              memory: 500M
+          ports:
+            - name: metrics
+              containerPort: 8002
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          volumeMounts:
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8001
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+        - name: mongodb-connection-string
+          secret:
+          # we point to the service-ai db
+            secretName: cognigy-service-ai
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password
+      imagePullSecrets:
+        - name: cognigy-registry-token
