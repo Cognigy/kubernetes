@@ -46,6 +46,7 @@ resources:
 - manifests/deployments/service-analytics-realtime.yaml
 - manifests/deployments/service-analytics-reporter.yaml
 - manifests/deployments/service-api.yaml
+- manifests/deployments/service-app-session-manager.yaml
 - manifests/deployments/service-custom-modules.yaml
 - manifests/deployments/service-endpoint.yaml
 - manifests/deployments/service-execution.yaml
