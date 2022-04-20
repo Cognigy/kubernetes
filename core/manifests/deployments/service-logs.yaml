@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-logs
-          image: cognigy.azurecr.io/service-logs:d8170cfe6eefcf09e78c5ed33fd3e68762ba6655
+          image: cognigy.azurecr.io/service-logs:5d89abc9d2cf5573316ad20c62fc58d329da083f
           resources:
             requests:
               cpu: '0.1'

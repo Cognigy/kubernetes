@@ -1,3 +1,7 @@
+# 4.23.3
+## Cognigy.AI (core)
+The referenced container images have changed.
+
 # 4.23.2
 ## Cognigy.AI (core)
 The referenced container images have changed.
