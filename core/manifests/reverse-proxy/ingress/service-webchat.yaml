@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: service-webchat
   annotations:
-    kubernetes.io/ingress.class: traefik
+    # kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   ingressClassName: traefik

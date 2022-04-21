@@ -93,6 +93,8 @@ spec:
           - "--providers.kubernetescrd"
           - "--providers.kubernetesingress"
           - "--entrypoints.websecure.http.tls=true"
+          - "--entrypoints.web.http.redirections.entrypoint.to=:443"
+          - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
           - "--log.level=INFO"
           - "--accesslog=true"
           - "--accesslog.fields.defaultmode=keep"

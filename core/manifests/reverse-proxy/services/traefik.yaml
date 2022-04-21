@@ -10,7 +10,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: traefik
+    app.kubernetes.io/instance: traefik
   ports:
   - port: 80
     name: web
@@ -19,4 +19,8 @@ spec:
   - port: 443
     name: websecure
     targetPort: "websecure"
+    protocol: TCP
+  - port: 8080
+    name: admin
+    targetPort: 8080
     protocol: TCP
