@@ -26,7 +26,16 @@ So at the end the ingress patch looks like below
     name: service-analytics-odata
   path: overlays/ingress/service-analytics-odata_patch.yaml
 ```
-And you also need to remove the traefik service patch as it is not required anymore.
+And you also need to remove the traefik service patch as it is not required anymore. So the following part need to be removed
+
+```yaml
+# reverse-proxy, service
+- target:
+    version: v1
+    kind: Service
+    name: traefik
+  path: overlays/reverse-proxy/services/traefik_patch.yaml
+```
 
 You need to apply all of these change in `kubernetes.git/core/<environment>/product/kustomization.yaml`
 
