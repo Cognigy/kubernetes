@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-ge
-          image: cognigy.azurecr.io/service-nlp-ge:6805ef4c8313c1da8cc765956e8adacc72f91bc5
+          image: cognigy.azurecr.io/service-nlp-ge:45362e3cd0d7f112b532ee7fb96674b1dac93097
           resources:
             requests:
               cpu: '0.350'

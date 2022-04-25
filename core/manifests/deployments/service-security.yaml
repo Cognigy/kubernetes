@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-security
-          image: cognigy.azurecr.io/service-security:5d89abc9d2cf5573316ad20c62fc58d329da083f
+          image: cognigy.azurecr.io/service-security:1e05729992ad0ad26aa867789e48906bdf571cc1
           resources:
             requests:
               cpu: '0.2'
@@ -29,6 +29,8 @@ spec:
             - configMapRef:
                 name: cognigy-env
           env:
+            - name: FEATURE_USE_NEW_PAGINATION_PLUGIN
+              value: 'true'
             - name: COGNIGY_LIVE_AGENT_PLATFORM_TOKEN
               valueFrom:
                 secretKeyRef:
