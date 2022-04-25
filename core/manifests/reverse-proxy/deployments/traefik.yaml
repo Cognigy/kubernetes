@@ -33,7 +33,7 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       containers:
-      - image: "cognigydevelopment.azurecr.io/traefik:2.6.3"
+      - image: "cognigy.azurecr.io/traefik:2.6.3"
         imagePullPolicy: IfNotPresent
         name: traefik
         resources:
