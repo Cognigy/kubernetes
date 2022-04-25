@@ -11,3 +11,9 @@ Please have a look at the adjusted ``kustomization.yaml`` file located under ``c
 ```
 
 Please apply the same change to your own copy of ``kustomization.yaml`` in order to ensure that this new microservice will be started when updating to Cognigy.AI v4.24.0
+
+## Management-UI
+The referenced container images have changed.
+
+## Live Agent lite (live-agent)
+The referenced container images have changed.
