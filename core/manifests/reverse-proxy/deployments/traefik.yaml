@@ -33,7 +33,7 @@ spec:
       terminationGracePeriodSeconds: 60
       hostNetwork: false
       containers:
-      - image: "traefik:2.6.1"
+      - image: "cognigydevelopment.azurecr.io/traefik:2.6.3"
         imagePullPolicy: IfNotPresent
         name: traefik
         resources:
@@ -106,7 +106,8 @@ spec:
           emptyDir: {}
       securityContext:
         fsGroup: 65532
-
+      imagePullSecrets:
+        - name: cognigy-registry-token
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
