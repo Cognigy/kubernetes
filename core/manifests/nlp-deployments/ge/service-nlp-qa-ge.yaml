@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: service-nlp-qa-ge
-          image: cognigydevelopment.azurecr.io/service-nlp-qa-ge:8e706065460e2e8028f350ef96a654125838e49c
+          image: cognigydevelopment.azurecr.io/service-nlp-qa-ge:970dd80a156f7d562d004d419663e460f66493d2
           resources:
             requests:
               cpu: '1'
-              memory: 2G
+              memory: 2.5G
             limits:
               cpu: '1'
-              memory: 2G
+              memory: 2.5G
           ports:
             - name: metrics
               containerPort: 8002
@@ -45,11 +45,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
-          env:
-            - name: NLP_IS_IN_SNAPSHOT_EXECUTOR
-              value: 'False'
-            - name: NLP_QA_PREFETCH_COUNT
-              value: '1'
       volumes:
         - name: rabbitmq-connection-string
           secret:
