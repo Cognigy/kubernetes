@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-session-state-manager
-          image: cognigydevelopment.azurecr.io/service-session-state-manager:7655090cc7fd6c9a56c46ced399b364535050c1f
+          image: cognigydevelopment.azurecr.io/service-session-state-manager:a54a8a82ee81252c9aecb6cbc62bd60744cff424
           resources:
             requests:
               cpu: '0.4'
