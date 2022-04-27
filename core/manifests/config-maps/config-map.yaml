@@ -76,5 +76,6 @@ data:
   TOKENIZERS_PARALLELISM: "false"
 
   # Tell "transformers" within service-nlp-qa to work offline and to not parallelize
+  # Can be either "1" for offline usage using local files or "0" to use online data.
   TRANSFORMERS_OFFLINE: "1"
   HF_DATASETS_OFFLINE: "1"
