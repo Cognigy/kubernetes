@@ -18,10 +18,10 @@ spec:
           resources:
             requests:
               cpu: '1'
-              memory: 2.5G
+              memory: 3G
             limits:
               cpu: '1'
-              memory: 2.5G
+              memory: 3G
           ports:
             - name: metrics
               containerPort: 8002
