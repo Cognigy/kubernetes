@@ -42,6 +42,9 @@ spec:
             initialDelaySeconds: 120
             periodSeconds: 60
             timeoutSeconds: 60
+          env:
+            - name: "LANGUAGES_TO_RUN"
+              value: "de-DE"
           envFrom:
             - configMapRef:
                 name: cognigy-env
