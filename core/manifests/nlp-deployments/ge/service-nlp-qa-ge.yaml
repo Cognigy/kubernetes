@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-qa-ge
-          image: cognigydevelopment.azurecr.io/service-nlp-qa-ge:970dd80a156f7d562d004d419663e460f66493d2
+          image: cognigydevelopment.azurecr.io/service-nlp-qa-ge:45362e3cd0d7f112b532ee7fb96674b1dac93097
           resources:
             requests:
               cpu: '1'
@@ -43,8 +43,8 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 60
           env:
-            - name: "LANGUAGES_TO_RUN"
-              value: "ar-AE,bn-IN,da-DK,es-ES,fi-FI,fr-FR,ge-GE,hi-IN,it-IT,ko-KR,nl-NL,nn-NO,pl-PL,pt-PT,pt-BR,ru-RU,sv-SE,ta-IN,tr-TR,vi-VN"
+            - name: LANGUAGES_TO_RUN
+              value: ar-AE,bn-IN,da-DK,es-ES,fi-FI,fr-FR,ge-GE,hi-IN,it-IT,ko-KR,nl-NL,nn-NO,pl-PL,pt-PT,pt-BR,ru-RU,sv-SE,ta-IN,tr-TR,vi-VN
           envFrom:
             - configMapRef:
                 name: cognigy-env

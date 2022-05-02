@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-qa-en
-          image: cognigydevelopment.azurecr.io/service-nlp-qa-en:7b349bc314ff0dcdde1d0fbbc2d1dbd93019498f
+          image: cognigydevelopment.azurecr.io/service-nlp-qa-en:45362e3cd0d7f112b532ee7fb96674b1dac93097
           imagePullPolicy: Always
           resources:
             requests:
@@ -44,8 +44,8 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 60
           env:
-            - name: "LANGUAGES_TO_RUN"
-              value: "en-US,en-IN,en-GB,en-CA,en-AU"
+            - name: LANGUAGES_TO_RUN
+              value: en-US,en-IN,en-GB,en-CA,en-AU
           envFrom:
             - configMapRef:
                 name: cognigy-env
