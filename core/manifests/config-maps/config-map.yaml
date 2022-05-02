@@ -71,3 +71,11 @@ data:
   # Cognigy Live Agent (New)
   # COGNIGY_LIVE_AGENT_API_BASE_URL_WITH_PROTOCOL
   # FEATURE_USE_COGNIGY_LIVE_AGENT
+
+  # Tell "tokenizers" within service-nlp-qa to not parallelize
+  TOKENIZERS_PARALLELISM: "false"
+
+  # Tell "transformers" within service-nlp-qa to work offline and to not parallelize
+  # Can be either "1" for offline usage using local files or "0" to use online data.
+  TRANSFORMERS_OFFLINE: "1"
+  HF_DATASETS_OFFLINE: "1"
