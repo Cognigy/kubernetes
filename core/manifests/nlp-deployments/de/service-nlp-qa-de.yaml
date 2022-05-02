@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-qa-de
-          image: cognigydevelopment.azurecr.io/service-nlp-qa-de:45362e3cd0d7f112b532ee7fb96674b1dac93097
+          image: cognigydevelopment.azurecr.io/service-nlp-qa-de:7b349bc314ff0dcdde1d0fbbc2d1dbd93019498f
           resources:
             requests:
               cpu: '1'
