@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-reporter
-          image: cognigydevelopment.azurecr.io/service-analytics-reporter:7e9f5f573a0bd6c9a117865b40530b5290cdebf0
+          image: cognigydevelopment.azurecr.io/service-analytics-reporter:c356b49ea3e2745a4e98f8530ea3812c891152a0
           resources:
             requests:
               cpu: '0.5'
