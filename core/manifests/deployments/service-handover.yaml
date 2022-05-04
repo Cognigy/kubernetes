@@ -38,6 +38,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: COGNIGY_LIVE_AGENT_PLATFORM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-live-agent-credentials
+                  key: cognigy-live-agent-platform-token
           livenessProbe:
             exec:
               command:
