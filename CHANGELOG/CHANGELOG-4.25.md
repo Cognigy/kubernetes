@@ -2,6 +2,8 @@
 ## Cognigy.AI (core)
 The referenced container images have changed.
 
+Document change in service-ui deployment as additional secrets needs to be present - otherwise the deployment will not be able to spawn pods
+
 ## Cognigy Insights
 Cognigy Insights will, as usual, be deployed as part of Cognigy.AI in the files located in the "core" folder.
 
