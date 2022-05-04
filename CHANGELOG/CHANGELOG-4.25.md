@@ -2,7 +2,7 @@
 ## Cognigy.AI (core)
 The referenced container images have changed.
 
-Document change in service-ui + service-handover deployment as additional secrets needs to be present - otherwise the deployment will not be able to spawn pods
+We have also adjusted the deployment files for `service-handover` and `service-ui`. Please make sure that you have read the changelog for `release v4.17.0` in which we have mentioned a new Kubernetes secret which you have to apply to your Kubernetes cluster in order to have a fully working installation.
 
 ## Cognigy Insights
 Cognigy Insights will, as usual, be deployed as part of Cognigy.AI in the files located in the "core" folder.
