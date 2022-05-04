@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ui
-          image: cognigy.azurecr.io/service-ui:821da3a08388980afbf398f975b53d6d01b6c895
+          image: cognigy.azurecr.io/service-ui:c84dbaca5fab634264d2216a75fc09a9dc597cbd
           resources:
             requests:
               cpu: '0.1'
@@ -28,5 +28,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: COGNIGY_LIVE_AGENT_PLATFORM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-live-agent-credentials
+                  key: cognigy-live-agent-platform-token
       imagePullSecrets:
         - name: cognigy-registry-token

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-odata
-          image: cognigy.azurecr.io/service-analytics-odata:1e05729992ad0ad26aa867789e48906bdf571cc1
+          image: cognigy.azurecr.io/service-analytics-odata:99b72abfacf807ee16b9034a7c9e7690872d23d8
           resources:
             requests:
               cpu: '0.1'

@@ -13,7 +13,7 @@ spec:
         app: service-handover
     spec:
       containers:
-        - image: cognigy.azurecr.io/service-handover:1e05729992ad0ad26aa867789e48906bdf571cc1
+        - image: cognigy.azurecr.io/service-handover:99b72abfacf807ee16b9034a7c9e7690872d23d8
           name: service-handover
           resources:
             requests:
@@ -38,6 +38,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: COGNIGY_LIVE_AGENT_PLATFORM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-live-agent-credentials
+                  key: cognigy-live-agent-platform-token
           livenessProbe:
             exec:
               command:
