@@ -1,3 +1,7 @@
+# 4.24.1
+## Cognigy.AI (core)
+The referenced container images have changed.
+
 # 4.24.0
 ## Cognigy.AI (core)
 This release does not only change the referenced container images, but also brings a new microservice called ``service-session-state-manager``.
