@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-collector
-          image: cognigydevelopment.azurecr.io/service-analytics-collector:e5ba3e94193c9820ac0a996b7eb1268390d8005b
+          image: cognigydevelopment.azurecr.io/service-analytics-collector:471cea2bb137fd0f3e96479d485200f463ffe741
           resources:
             requests:
               cpu: '0.300'
