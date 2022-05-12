@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-app-session-manager
+  labels:
+    app: service-app-session-manager
+  annotations:
+    # Annotation our traefik reverse-proxy uses to enable
+    # sticky-sessions. If you are not using traefik, this
+    # annotation will do nothing.
+    traefik.ingress.kubernetes.io/affinity: "true"
+    traefik.ingress.kubernetes.io/session-secure: "true"
+    traefik.ingress.kubernetes.io/session-same-site: "none"
+spec:
+  ports:
+    - name: service-app-session-manager
+      port: 8000
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    app: service-app-session-manager
