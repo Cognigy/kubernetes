@@ -9,3 +9,6 @@ This release also introduces a couple of new files which are not relevant, yet. 
 The `nlp-deployments` folder also contains new components in the respective sub-folders - this can also be ignored.
 
 **The new files are only here as we prepare some changes for future Cognigy.AI versions - you can ignore them for now as we will mention changes as soon as they are relevant.**
+
+## Live Agent lite (live-agent)
+The referenced container images have changed.
