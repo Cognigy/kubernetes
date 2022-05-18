@@ -1,55 +1,54 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-session-state-manager
+  name: service-nlp-qa-en
 spec:
   selector:
     matchLabels:
-      app: service-session-state-manager
+      app: service-nlp-qa-en
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-session-state-manager
+        app: service-nlp-qa-en
     spec:
       containers:
-        - name: service-session-state-manager
-          image: cognigy.azurecr.io/service-session-state-manager:63323ec9ca662cdf2382df3977f7473bc13369b5
+        - name: service-nlp-qa-en
+          image: cognigy.azurecr.io/service-nlp-qa-en:3766e8b8c1382f23d2a9181110bd7c537d8bbb5a
+          imagePullPolicy: Always
           resources:
             requests:
-              cpu: '0.4'
-              memory: 400M
+              cpu: '1'
+              memory: 3G
             limits:
-              cpu: '0.4'
-              memory: 500M
+              cpu: '1'
+              memory: 3G
           ports:
             - name: metrics
               containerPort: 8002
-          envFrom:
-            - configMapRef:
-                name: cognigy-env
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
-            - name: mongodb-connection-string
-              mountPath: /var/run/secrets/mongodbConnectionString
-              subPath: mongodbConnectionString
+            - name: local
+              mountPath: /data/local
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
-          startupProbe:
-            httpGet:
-              path: /health/startup
-              port: 8001
           livenessProbe:
             httpGet:
-              path: /health/liveness
+              path: /
               port: 8001
-            failureThreshold: 3
-            initialDelaySeconds: 90
+            failureThreshold: 1
+            initialDelaySeconds: 120
             periodSeconds: 60
-            timeoutSeconds: 10
+            timeoutSeconds: 60
+          env:
+            - name: LANGUAGES_TO_RUN
+              value: en-US,en-IN,en-GB,en-CA,en-AU
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
       volumes:
         - name: rabbitmq-connection-string
           secret:
@@ -57,12 +56,8 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: mongodb-connection-string
-          secret:
-            secretName: cognigy-service-ai
-            items:
-              - key: connection-string
-                path: mongodbConnectionString
+        - name: local
+          emptyDir: {}
         - name: redis-password
           secret:
             secretName: cognigy-redis-password

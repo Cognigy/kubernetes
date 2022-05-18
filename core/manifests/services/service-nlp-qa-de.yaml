@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-nlp-qa-de
+  labels:
+    app: service-nlp-qa-de
+  annotations:    
+spec:
+  ports:
+    - name: service-nlp-qa-de
+      port: 8008
+      targetPort: 8008
+      protocol: TCP
+  selector:
+    app: service-nlp-qa-de

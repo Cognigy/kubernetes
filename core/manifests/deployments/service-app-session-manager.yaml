@@ -1,33 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-custom-modules
+  name: service-app-session-manager
 spec:
   selector:
     matchLabels:
-      app: service-custom-modules
+      app: service-app-session-manager
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-custom-modules
+        app: service-app-session-manager
     spec:
       containers:
-        - name: service-custom-modules
-          image: cognigy.azurecr.io/service-custom-modules:63323ec9ca662cdf2382df3977f7473bc13369b5
+        - name: service-app-session-manager
+          image: cognigy.azurecr.io/service-app-session-manager:63323ec9ca662cdf2382df3977f7473bc13369b5
           resources:
             requests:
-              cpu: '0.3'
-              memory: 512M
+              cpu: '0.4'
+              memory: 400M
             limits:
-              cpu: '0.3'
-              memory: 512M
+              cpu: '0.4'
+              memory: 500M
           ports:
             - name: metrics
               containerPort: 8002
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
           volumeMounts:
-            - name: flow-modules
-              mountPath: /app/flowModules
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
@@ -37,22 +38,19 @@ spec:
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
-          envFrom:
-            - configMapRef:
-                name: cognigy-env
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /health/liveness
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
             timeoutSeconds: 10
       volumes:
-        - name: flow-modules
-          persistentVolumeClaim:
-            claimName: flow-modules
         - name: rabbitmq-connection-string
           secret:
             secretName: cognigy-rabbitmq
@@ -61,7 +59,7 @@ spec:
                 path: rabbitmqConnectionString
         - name: mongodb-connection-string
           secret:
-            secretName: cognigy-service-custom-modules
+            secretName: cognigy-service-app-session-manager
             items:
               - key: connection-string
                 path: mongodbConnectionString
