@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/instance: traefik
   annotations:
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 spec:
   type: LoadBalancer
   selector:
@@ -22,4 +23,8 @@ spec:
   - port: 8080
     name: admin
     targetPort: 8080
+    protocol: TCP
+  - port: 9000
+    name: traefik
+    targetPort: 9000
     protocol: TCP

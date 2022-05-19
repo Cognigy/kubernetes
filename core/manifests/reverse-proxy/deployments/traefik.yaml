@@ -87,6 +87,7 @@ spec:
           - "--entrypoints.web.address=:8000/tcp"
           - "--entrypoints.websecure.address=:8443/tcp"
           - "--api.dashboard=true"
+          - "--api.insecure=true"
           - "--ping=true"
           - "--metrics.prometheus=true"
           - "--metrics.prometheus.entrypoint=metrics"
@@ -99,6 +100,10 @@ spec:
           - "--accesslog=true"
           - "--accesslog.fields.defaultmode=keep"
           - "--accesslog.fields.headers.defaultmode=drop"
+          - "--entryPoints.web.forwardedHeaders.insecure"
+          - "--entryPoints.websecure.forwardedHeaders.insecure"
+          - "--entryPoints.web.proxyProtocol.insecure"
+          - "--entryPoints.websecure.proxyProtocol.insecure"
       volumes:
         - name: data
           emptyDir: {}
