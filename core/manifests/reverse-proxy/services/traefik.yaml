@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/instance: traefik
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
 spec:
   type: LoadBalancer
   selector:
