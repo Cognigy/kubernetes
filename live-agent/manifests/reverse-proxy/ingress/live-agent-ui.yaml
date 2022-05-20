@@ -4,6 +4,7 @@ metadata:
   name: live-agent-ui
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-ipwhitelist@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:

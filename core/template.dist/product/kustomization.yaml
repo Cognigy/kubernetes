@@ -70,6 +70,9 @@ resources:
 
 # reverse proxy
 - manifests/reverse-proxy/deployments/traefik.yaml
+- manifests/reverse-proxy/deployments/traefik-crd.yaml
+- manifests/reverse-proxy/deployments/traefik_tlsoption.yaml
+- manifests/reverse-proxy/deployments/traefik-middleware-ipwhitelist.yaml
 - manifests/reverse-proxy/ingress/service-analytics-odata.yaml
 - manifests/reverse-proxy/ingress/service-api.yaml
 - manifests/reverse-proxy/ingress/service-endpoint.yaml
@@ -120,6 +123,13 @@ patchesJson6902:
     kind: Ingress
     name: service-webchat
   path: overlays/reverse-proxy/ingress/service-webchat_patch.yaml
+
+# services
+- target:
+    version: v1
+    kind: Service
+    name: traefik
+  path: overlays/services/traefik_patch.yaml
 
 patchesStrategicMerge:
   - replica_count.yaml
