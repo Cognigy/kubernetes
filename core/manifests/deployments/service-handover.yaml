@@ -13,7 +13,7 @@ spec:
         app: service-handover
     spec:
       containers:
-        - image: cognigy.azurecr.io/service-handover:4645e4cfc59ea30acf7319b643b53de5e06357a9
+        - image: cognigy.azurecr.io/service-handover:c368e288e3822da5e2d0bd0942e6bf018d361be7
           name: service-handover
           resources:
             requests:
