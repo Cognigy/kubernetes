@@ -27,15 +27,15 @@ patchesJson6902:
 
 # reverse-proxy, ingress
 - target:
-    group: extensions
-    version: v1beta1
+    group: networking.k8s.io
+    version: v1
     kind: Ingress
     name: live-agent-api
   path: overlays/reverse-proxy/ingress/live-agent-api_patch.yaml
 
 - target:
-    group: extensions
-    version: v1beta1
+    group: networking.k8s.io
+    version: v1
     kind: Ingress
     name: live-agent-ui
   path: overlays/reverse-proxy/ingress/live-agent-ui_patch.yaml
