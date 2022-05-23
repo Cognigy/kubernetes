@@ -1,15 +1,16 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: service-app-session-manager
+  name: service-static-files
   annotations:
-    kubernetes.io/ingress.class: traefik
+    kubernetes.io/ingress.class: traefik    
 spec:
+  ingressClassName: service-static-files
   rules:
-    - host: apps
+    - host: static
       http:
         paths:
           - path: /
             backend:
-              serviceName: service-app-session-manager
+              serviceName: service-static-files
               servicePort: 8000
