@@ -1,16 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: service-static-files
-  annotations:
-    kubernetes.io/ingress.class: traefik    
+    name: service-static-files
+    annotations:
+        kubernetes.io/ingress.class: traefik        
 spec:
-  ingressClassName: service-static-files
-  rules:
+    rules:
     - host: static
       http:
         paths:
-          - path: /
-            backend:
+        - path: /
+          backend:
               serviceName: service-static-files
-              servicePort: 8000
+              servicePort: 8000   
