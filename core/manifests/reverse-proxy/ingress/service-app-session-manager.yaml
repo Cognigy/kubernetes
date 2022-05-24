@@ -13,3 +13,7 @@ spec:
             backend:
               serviceName: service-app-session-manager
               servicePort: 8000
+          - path: /
+            backend:
+              serviceName: service-app-session-manager
+              servicePort: 8010

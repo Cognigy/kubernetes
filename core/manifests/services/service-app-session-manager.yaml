@@ -13,9 +13,13 @@ metadata:
     traefik.ingress.kubernetes.io/session-same-site: "none"
 spec:
   ports:
-    - name: service-app-session-manager
+    - name: api
       port: 8000
       targetPort: 8000
+      protocol: TCP
+    - name: socketio
+      port: 8010
+      targetPort: 8010
       protocol: TCP
   selector:
     app: service-app-session-manager
