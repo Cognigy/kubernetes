@@ -51,6 +51,7 @@ data:
   # DNS names
   FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
   BACKEND_BASE_URL_WITH_PROTOCOL: http://api
+   MANAGEMENTUI_BASE_URL_WITH_PROTOCOL: http://management-ui
   ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
   WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
   ENDPOINT_BASE_URL: http://endpoint
@@ -80,3 +81,4 @@ data:
   TRANSFORMERS_OFFLINE: "1"
   HF_DATASETS_OFFLINE: "1"
   SYS_ADMINISTRATOR_EMAIL: "sys.admin@cognigy.com"
+ 
