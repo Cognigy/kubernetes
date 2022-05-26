@@ -79,3 +79,4 @@ data:
   # Can be either "1" for offline usage using local files or "0" to use online data.
   TRANSFORMERS_OFFLINE: "1"
   HF_DATASETS_OFFLINE: "1"
+  SYS_ADMINISTRATOR_EMAIL: "sys.admin@cognigy.com"
