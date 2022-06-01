@@ -1,51 +1,41 @@
 # 4.27.0
 ## Cognigy.AI / Cognigy Insights (core)
-The referenced container images have changed.
+In addition to adjusted container images, this release also upgrades `Traefik` - the Kubernetes Ingress Controller we ship with Cognigy.AI by default - to a new version. By updating to Traefik 2.6 we gain compatiblity with `Kubernetes v1.22+` which was not supported beforehand.
 
----
-TODO properly format:
+## Migration from Traefik v1.7 to v2.6
+With Traefik v2.6 we are introducing some new features such as 
 
-# Migrate Traefik from v1.7 to v2.6
-
-## Introduction
-
-Previously, Cognigy.ai comes with Traefik v1.7, which is deployed via Kustomization. We migrate Traefik from v1.7 to v2.6 because Traefik v1.7 does not support Kubernetes 1.22 and after. 
-
-In Traefik v2.6 we are introducing some new features such as 
-
-- Support of kubernetes version greater than 1.21
+- Support for Kubernetes versions greater than `v1.21`
 - X-Forwarded-For Header support with AWS classic load balancer to preserve client IP
 
-To introduce these new features we deployed `custom resource defination`, `TLSOption` custom resource along with `IPwhitelist` middleware. To learn more about it please check [official documentation](https://doc.traefik.io/traefik/vv2.6/middlewares/http/overview/#available-http-middlewares). 
+In order to introduce these new features, we will deploy `Custom Resource Definitions` like `TLSOption` and `Middlewares` the new Traefik version will parse and use. To learn more about it please check [official documentation](https://doc.traefik.io/traefik/vv2.6/middlewares/http/overview/#available-http-middlewares).
 
-> **NOTE**: The migration process will have a very short downtime, when the `traefik` Deployment is recreated.
+**Note**: The migration process will have a very short downtime as the `Traefik` Deployments needs to be re-created entirely
 
-## Step-by-step
+In order to upgrade to Cognigy.AI v4.27.0 (including Traefik v2.6), please follow these steps:
 
-### Deploy traefik CRD
-
-To deploy traefik CRD
+### 1 Deploy Traefik Custom Resource Definitions (=CRDs)
+To deploy traefik CRDs:
 
 ```bash 
 kubectl apply -f kubernetes/core/manifests/reverse-proxy/deployments/traefik-crd.yaml
 ```
-**Please make sure that you are deploying this CRD before starting upgrade the Cognigy AI, as the middlewares and custom resources from traefik are using this CRD and the ingresses are using the middlewares and custom resources. So without this CRD the ingresses will not work.**
 
-### Prepare patch for x-forwarded for
+**Important: Please make sure that you deploy thes CRDs before starting to upgrade Cognigy.AI, as the CRs (Custom Resources) will be applied and Kubernetes won't know them by default. Connectivity will not work without the CRDs to be present in your cluster!**
 
+### 2 Prepare patch for x-forwarded for
 You need to add the following contents under `kubernetes/core/<environment>/product/overlays/reverse-proxy/services/traefik_patch.yaml`
 
 ```yaml
-
 - op: replace
   path: /metadata/annotations
   value:
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol : "*"
-
 ```
-**Please note, the `service.beta.kubernetes.io/aws-load-balancer-proxy-protocol` annotation is only for AWS classic load balancer, if you are using some other load balancer then you need to replace it with proper annotation specific for your load balancer.**
 
-If you don't want to use X-Forwarded-for then you can comment the following contents in your kustomization file under `kubernetes/core/<environment>/product/kustomization.yaml`
+**Important: Please note, that the `service.beta.kubernetes.io/aws-load-balancer-proxy-protocol` annotation is only suitable for AWS classic load balancers, if you are using some other load balancer then you need to replace it with proper annotations specific for your load balancer.**
+
+If you don't want to use the X-Forwarded-for feature, feel free to comment the following contents in your kustomization file under `kubernetes/core/<environment>/product/kustomization.yaml`
 
 ```yaml
 # reverse-proxy, service
@@ -55,16 +45,19 @@ If you don't want to use X-Forwarded-for then you can comment the following cont
     name: traefik
   path: overlays/reverse-proxy/services/traefik_patch.yaml
 ```
-### Change in the kustomization script
 
-You need to modify the `group` and `version` of all the ingress objects to make it compatible. The changes are below
+**Important: In case you comment the code-block above, you won't attach the necessary annotation and x-forwarded-for will not work. The impact on this is, that Cognigy.AI won't see the real client IP address of your end-users - so certain analytics capabilities in Cognigy Insights or geo-locating users in Cognigy.AI won't work!**
 
+### 3 Adjusting your kustomization.yaml
+Please open your `kustomization.yaml` file in the product folder (`kubernetes/core/<environment>/product/kustomization.yaml`) and search for your `Ingress patches`. Make sure that you modify the `target.group` and `target.version` properties as we have updated the Ingress Objects accordingly.
+
+The new values for these fields are:
 ```yaml
 group: networking.k8s.io
 version: v1
 ```
-So at the end the ingress patch looks like below
 
+After your modification, your Ingress patches should look like the following:
 ```yaml
 - target:
     group: networking.k8s.io
@@ -73,13 +66,12 @@ So at the end the ingress patch looks like below
     name: service-analytics-odata
   path: overlays/ingress/service-analytics-odata_patch.yaml
 ```
-You need to apply all of these change in `kubernetes/core/<environment>/product/kustomization.yaml`
 
-### Update procedure
-
-You only need to apply the changes using latest kustomization script
-
+### 4 Normal update procedure
+You can now follow the normal update procedure and run the kustomization in order to apply your patches to our manifest files and apply them to your Kubernetes cluster:
 ```bash
 cd kubernetes.git/core/<environment>/product
 kubectl apply -k ./ --force
 ```
+
+**Important: Please use the '--force' flag in this command. It will make sure that the Traefik deployment will be replaced entirely. This will produce a very short downtime as no Traefik Pod will run for a couple of seconds (depending on your connection speed to download the new container image).**
