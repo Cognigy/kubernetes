@@ -8,7 +8,7 @@ spec:
       app: efs-provisioner-flow-modules
   replicas: 1
   strategy:
-    type: Recreate 
+    type: Recreate
   template:
     metadata:
       labels:
@@ -58,7 +58,7 @@ metadata:
   name: aws-efs-flow-modules
 provisioner: efs-provisioner-flow-modules
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: efs-provisioner-flow-modules

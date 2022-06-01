@@ -1,4 +1,4 @@
-- op: add
-  path: /spec/externalIPs
+- op: replace
+  path: /metadata/annotations
   value:
-    - "10.215.27.118"
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol : "*"
