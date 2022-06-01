@@ -10,7 +10,7 @@ With Traefik v2.6 we are introducing some new features such as
 - Support for Kubernetes versions greater than `v1.21`
 - X-Forwarded-For Header support with AWS classic load balancer to preserve client IP
 
-In order to introduce these new features, we will deploy `Custom Resource Definitions` like `TLSOption` and `Middlewares` the new Traefik version will parse and use. To learn more about it please check [official documentation](https://doc.traefik.io/traefik/vv2.6/middlewares/http/overview/#available-http-middlewares).
+In order to introduce these new features, we will deploy `Custom Resource Definitions` like `TLSOption` and `Middlewares` the new Traefik version will parse and use. To learn more about it please check [official documentation](https://doc.traefik.io/traefik/middlewares/overview/).
 
 **Note**: The migration process will have a very short downtime as the `Traefik` Deployments needs to be re-created entirely
 
