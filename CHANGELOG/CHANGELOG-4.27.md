@@ -23,7 +23,7 @@ To deploy traefik CRDs:
 kubectl apply -f kubernetes/core/manifests/reverse-proxy/deployments/traefik-crd.yaml
 ```
 
-**Important: Please make sure that you deploy thes CRDs before starting to upgrade Cognigy.AI, as the CRs (Custom Resources) will be applied and Kubernetes won't know them by default. Connectivity will not work without the CRDs to be present in your cluster!**
+**Important: Please make sure that you deploy these CRDs before starting to upgrade Cognigy.AI, as the CRs (Custom Resources) will be applied and Kubernetes won't know them by default. Connectivity will not work without the CRDs to be present in your cluster!**
 
 ### 2 Prepare patch for x-forwarded for
 You need to add the following contents under `kubernetes/core/<environment>/product/overlays/reverse-proxy/services/traefik_patch.yaml`
