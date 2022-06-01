@@ -2,6 +2,8 @@
 ## Cognigy.AI / Cognigy Insights (core)
 In addition to adjusted container images, this release also upgrades `Traefik` - the Kubernetes Ingress Controller we ship with Cognigy.AI by default - to a new version. By updating to Traefik 2.6 we gain compatiblity with `Kubernetes v1.22+` which was not supported beforehand.
 
+Please also make sure that you have closely followed the instructions mentioned in [Changelog v4.23](./CHANGELOG-4.23.md) in order to be able to use the `Server Side Playbook feature` accordingly.
+
 ## Migration from Traefik v1.7 to v2.6
 With Traefik v2.6 we are introducing some new features such as 
 
