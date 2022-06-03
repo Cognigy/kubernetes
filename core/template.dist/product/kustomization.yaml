@@ -70,6 +70,9 @@ resources:
 
 # reverse proxy
 - manifests/reverse-proxy/deployments/traefik.yaml
+- manifests/reverse-proxy/deployments/traefik-crd.yaml
+- manifests/reverse-proxy/deployments/traefik_tlsoption.yaml
+- manifests/reverse-proxy/deployments/traefik-middleware-ipwhitelist.yaml
 - manifests/reverse-proxy/ingress/service-analytics-odata.yaml
 - manifests/reverse-proxy/ingress/service-api.yaml
 - manifests/reverse-proxy/ingress/service-endpoint.yaml
@@ -87,46 +90,46 @@ patchesJson6902:
 
 # reverse-proxy, ingress
 - target:
-    group: extensions
-    version: v1beta1
+    group: networking.k8s.io
+    version: v1
     kind: Ingress
     name: service-analytics-odata
   path: overlays/reverse-proxy/ingress/service-analytics-odata_patch.yaml
 
 - target:
-    group: extensions
-    version: v1beta1
+    group: networking.k8s.io
+    version: v1
     kind: Ingress
     name: service-api
   path: overlays/reverse-proxy/ingress/service-api_patch.yaml
 
 - target:
-    group: extensions
-    version: v1beta1
+    group: networking.k8s.io
+    version: v1
     kind: Ingress
     name: service-endpoint
   path: overlays/reverse-proxy/ingress/service-endpoint_patch.yaml
 
 - target:
-    group: extensions
-    version: v1beta1
+    group: networking.k8s.io
+    version: v1
     kind: Ingress
     name: service-ui
   path: overlays/reverse-proxy/ingress/service-ui_patch.yaml
 
 - target:
-    group: extensions
-    version: v1beta1
+    group: networking.k8s.io
+    version: v1
     kind: Ingress
     name: service-webchat
   path: overlays/reverse-proxy/ingress/service-webchat_patch.yaml
 
-# reverse-proxy, service
+# services
 - target:
     version: v1
     kind: Service
     name: traefik
-  path: overlays/reverse-proxy/services/traefik_patch.yaml
+  path: overlays/services/traefik_patch.yaml
 
 patchesStrategicMerge:
   - replica_count.yaml

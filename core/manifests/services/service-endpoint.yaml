@@ -8,9 +8,9 @@ metadata:
     # Annotation our traefik reverse-proxy uses to enable
     # sticky-sessions. If you are not using traefik, this
     # annotation will do nothing.
-    traefik.ingress.kubernetes.io/affinity: "true"
-    traefik.ingress.kubernetes.io/session-secure: "true"
-    traefik.ingress.kubernetes.io/session-same-site: "none"
+    traefik.ingress.kubernetes.io/service.sticky.cookie: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.secure: "true"
+    traefik.ingress.kubernetes.io/service.sticky.cookie.samesite: "none"
 spec:
   ports:
     - name: service-endpoint

@@ -1,15 +1,22 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: live-agent-api
   annotations:
-    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-ipwhitelist@kubernetescrd
 spec:
+  ingressClassName: traefik
+  tls:
+  - secretName: cognigy-traefik
   rules:
   - host: live-agent-api
     http:
       paths:
-      - path: /
-        backend:
-          serviceName: live-agent-api
-          servicePort: 8000
+      - backend:
+          service:
+            name: live-agent-api
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix

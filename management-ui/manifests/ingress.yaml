@@ -1,15 +1,22 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: management-ui
-    annotations:
-        kubernetes.io/ingress.class: traefik
+  name: management-ui
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-ipwhitelist@kubernetescrd
 spec:
-    rules:
-    - host: management-ui
-      http:
-        paths:
-        - path: /
-          backend:
-              serviceName: management-ui
-              servicePort: 8000
+  ingressClassName: traefik
+  tls:
+  - secretName: cognigy-traefik
+  rules:
+  - host: management-ui
+    http:
+      paths:
+      - backend:
+          service:
+            name: management-ui
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix

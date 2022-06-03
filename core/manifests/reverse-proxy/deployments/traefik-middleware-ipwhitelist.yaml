@@ -1,0 +1,12 @@
+# Whitelisting Based on `X-Forwarded-For` with `depth=0`
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: ipwhitelist
+  namespace: default
+spec:
+  ipWhiteList:
+    sourceRange:
+      - 0.0.0.0/0
+    ipStrategy:
+      depth: 0
