@@ -1,60 +1,121 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: traefik
+  name: traefik
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik
+  annotations:
 spec:
-    selector:
-        matchLabels:
-            app: traefik
-    replicas: 1
-    template:
-        metadata:
-            labels:
-                app: traefik
-        spec:
-            serviceAccount: traefik
-            containers:
-            - name: traefik
-              image: cognigy.azurecr.io/traefik:1.7.26-alpine_non_priviledged
-              resources:
-                requests:
-                    memory: "70Mi"
-                    cpu: "200m"
-                limits:
-                    memory: "200Mi"
-                    cpu: "2000m"
-              args: [
-                "--api",
-                "--kubernetes",
-                "--entryPoints=Name:http Address::8000 Redirect.EntryPoint:https ProxyProtocol.TrustedIPs:0.0.0.0/0 WhiteList.UseXForwardedFor:true",
-                "--entryPoints=Name:https Address::4430 TLS:/run/secrets/traefik.cert,/run/secrets/traefik.key TLS.MinVersion:VersionTLS12 ProxyProtocol.TrustedIPs:0.0.0.0/0 WhiteList.UseXForwardedFor:true",
-                "--defaultentrypoints=http,https",
-                "--metrics.prometheus=true"
-              ]
-              ports:
-                - name: http
-                  containerPort: 8000
-                - name: https
-                  containerPort: 4430
-                - name: metrics
-                  containerPort: 8080
-              volumeMounts:
-                 - name: traefik
-                   mountPath: /var/run/secrets/
-            volumes:
-            - name: traefik
-              secret:
-                  secretName: cognigy-traefik
-                  items:
-                    - key: tls.crt
-                      path: traefik.cert
-                    - key: tls.key
-                      path: traefik.key
-            imagePullSecrets:
-            - name: cognigy-registry-token
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: traefik
+      app.kubernetes.io/instance: traefik
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 0
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "9100"
+      labels:
+        app.kubernetes.io/name: traefik
+        app.kubernetes.io/instance: traefik
+    spec:
+      serviceAccountName: traefik
+      terminationGracePeriodSeconds: 60
+      hostNetwork: false
+      containers:
+      - image: "cognigy.azurecr.io/traefik:2.6.3"
+        imagePullPolicy: IfNotPresent
+        name: traefik
+        resources:
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 9000
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 9000
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        ports:
+        - name: "metrics"
+          containerPort: 9100
+          protocol: "TCP"
+        - name: "traefik"
+          containerPort: 9000
+          protocol: "TCP"
+        - name: "web"
+          containerPort: 8000
+          protocol: "TCP"
+        - name: "websecure"
+          containerPort: 8443
+          protocol: "TCP"
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsGroup: 65532
+          runAsNonRoot: true
+          runAsUser: 65532
+        volumeMounts:
+          - name: data
+            mountPath: /data
+          - name: tmp
+            mountPath: /tmp
+        args:
+          - "--entrypoints.metrics.address=:9100/tcp"
+          - "--entrypoints.traefik.address=:9000/tcp"
+          - "--entrypoints.web.address=:8000/tcp"
+          - "--entrypoints.websecure.address=:8443/tcp"
+          - "--api.dashboard=true"
+          - "--api.insecure=true"
+          - "--ping=true"
+          - "--metrics.prometheus=true"
+          - "--metrics.prometheus.entrypoint=metrics"
+          - "--providers.kubernetescrd"
+          - "--providers.kubernetesingress"
+          - "--entrypoints.websecure.http.tls=true"
+          - "--entrypoints.web.http.redirections.entrypoint.to=:443"
+          - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+          - "--log.level=INFO"
+          - "--accesslog=true"
+          - "--accesslog.fields.defaultmode=keep"
+          - "--accesslog.fields.headers.defaultmode=drop"
+          - "--entryPoints.web.forwardedHeaders.insecure"
+          - "--entryPoints.websecure.forwardedHeaders.insecure"
+          - "--entryPoints.web.proxyProtocol.insecure"
+          - "--entryPoints.websecure.proxyProtocol.insecure"
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+      securityContext:
+        fsGroup: 65532
+      imagePullSecrets:
+        - name: cognigy-registry-token
 ---
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: traefik
 
@@ -71,14 +132,17 @@ rules:
       - watch
   - apiGroups:
       - extensions
+      - networking.k8s.io
     resources:
       - ingresses
+      - ingressclasses
     verbs:
       - get
       - list
       - watch
   - apiGroups:
       - extensions
+      - networking.k8s.io
     resources:
       - ingresses/status
     verbs:
@@ -86,39 +150,15 @@ rules:
   - apiGroups:
       - traefik.containo.us
     resources:
-      - middlewares
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - traefik.containo.us
-    resources:
       - ingressroutes
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - traefik.containo.us
-    resources:
       - ingressroutetcps
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - traefik.containo.us
-    resources:
+      - ingressrouteudps
+      - middlewares
+      - middlewaretcps
       - tlsoptions
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - traefik.containo.us
-    resources:
+      - tlsstores
       - traefikservices
+      - serverstransports
     verbs:
       - get
       - list
@@ -126,7 +166,7 @@ rules:
 
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: traefik
 
@@ -138,9 +178,23 @@ subjects:
   - kind: ServiceAccount
     name: traefik
     namespace: default
+
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   namespace: default
   name: traefik
+
+---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+  labels:
+    app.kubernetes.io/name: traefik
+    app.kubernetes.io/instance: traefik
+  name: traefik
+spec:
+  controller: traefik.io/ingress-controller
