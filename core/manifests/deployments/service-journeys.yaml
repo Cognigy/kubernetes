@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-journeys
-          image: cognigydevelopment.azurecr.io/service-journeys:8fa7b83cd91f373d9d82ed42ec716277cce98cd9
+          image: cognigydevelopment.azurecr.io/service-journeys:9c3d4b79216894463f971283d51e9aa3d7ee7417
           resources:
             requests:
               cpu: '0.1'
