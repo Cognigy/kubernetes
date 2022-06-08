@@ -80,8 +80,10 @@ data:
   # Can be either "1" for offline usage using local files or "0" to use online data.
   TRANSFORMERS_OFFLINE: "1"
   HF_DATASETS_OFFLINE: "1"
+
+  # WARN: this is not a valid email, just a placeholder with a correct format
   SYS_ADMINISTRATOR_EMAIL: "sys.admin@cognigy.com"
 
-  # Default to 24h => 1440min
-  DELETE_ORGANIZATION_TOKEN_LIFETIME_TTL_IN_MINUTES: "1440"
+  # Default to 2h => 120min
+  DELETE_ORGANIZATION_TOKEN_LIFETIME_TTL_IN_MINUTES: "120"
  
