@@ -82,7 +82,7 @@ data:
   HF_DATASETS_OFFLINE: "1"
 
   # WARN: this is not a valid email, just a placeholder with a correct format
-  SYS_ADMINISTRATOR_EMAIL: "sys.admin@cognigy.com"
+  # SYS_ADMINISTRATOR_EMAIL: "sys.admin@cognigy.com"
 
   # Default to 2h => 120min
   DELETE_ORGANIZATION_TOKEN_LIFETIME_TTL_IN_MINUTES: "120"
