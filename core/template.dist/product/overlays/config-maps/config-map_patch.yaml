@@ -29,11 +29,17 @@
   path: /data/WEBCHAT_BASE_URL_WITH_PROTOCOL
   value: "http://webchat"
 - op: add
+  path: /data/APPS_BASE_URL_WITH_PROTOCOL
+  value: "http://apps"
+- op: add
+  path: /data/STATIC_FILES_URL_WITH_PROTOCOL
+  value: "http://static"
+- op: add
   path: /data/ODATA_HOSTNAME
   value: "odata"
 - op: add
   path: /data/ODATA_PROTOCOL
-  value: "http"
+  value: "http"  
 
 # INTERNAL API for management ui
 # - op: add

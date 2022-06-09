@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-static-files
+spec:
+  selector:
+    matchLabels:
+      app: service-static-files
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-static-files
+    spec:
+      containers:
+        - image: cognigydevelopment.azurecr.io/service-static-files:31da532b814978dd066057a8d970e4b92c50c0be
+          name: service-static-files
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: cognigy-registry-token
