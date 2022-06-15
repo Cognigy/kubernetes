@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ui
-          image: cognigydevelopment.azurecr.io/service-ui:1a9ae0143cd6685ab98769ed910e07c9af7a84aa
+          image: cognigydevelopment.azurecr.io/service-ui:8ae0815950cbacbb96527e487def35688442034f
           resources:
             requests:
               cpu: '0.1'
