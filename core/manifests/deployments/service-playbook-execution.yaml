@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-playbook-execution
-          image: cognigy.azurecr.io/service-playbook-execution:c368e288e3822da5e2d0bd0942e6bf018d361be7
+          image: cognigy.azurecr.io/service-playbook-execution:faee6e2ac369204f50e72c88bc8a96887bc7a62a
           resources:
             requests:
               cpu: '0.1'
