@@ -13,7 +13,7 @@ spec:
         app: service-static-files
     spec:
       containers:
-        - image: cognigydevelopment.azurecr.io/service-static-files:adfa17efeeb5dff6e552aafb0706718167f8b5ce
+        - image: cognigydevelopment.azurecr.io/service-static-files:169b4505a5eb748feed5425dfc12794b50f250ea
           name: service-static-files
           ports:
             - containerPort: 80
