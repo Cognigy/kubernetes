@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-app-session-manager
-          image: cognigy.azurecr.io/service-app-session-manager:adfa17efeeb5dff6e552aafb0706718167f8b5ce
+          image: cognigy.azurecr.io/service-app-session-manager:2655676815931f8c7094a2dbc88a883ee5b80809
           resources:
             requests:
               cpu: '0.4'
