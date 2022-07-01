@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: service-app-session-manager
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: apps
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: service-app-session-manager
+              servicePort: 8000          

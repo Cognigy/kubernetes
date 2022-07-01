@@ -33,7 +33,7 @@
   value: "odata"
 - op: add
   path: /data/ODATA_PROTOCOL
-  value: "http"
+  value: "http"  
 
 # INTERNAL API for management ui
 # - op: add
