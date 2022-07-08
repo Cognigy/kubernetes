@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-alexa-management
-          image: cognigydevelopment.azurecr.io/service-alexa-management:aaf7ca95c2efe44cb0e5fa2cae7684be91f80e20
+          image: cognigydevelopment.azurecr.io/service-alexa-management:920b2dcf36d15b58baae558ca4ff55a0d0fc8151
           resources:
             requests:
               cpu: '0.1'

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-custom-modules
-          image: cognigydevelopment.azurecr.io/service-custom-modules:aaf7ca95c2efe44cb0e5fa2cae7684be91f80e20
+          image: cognigydevelopment.azurecr.io/service-custom-modules:efa6b91efe1c713ccb8cfe748e0cbc517735fd22
           resources:
             requests:
               cpu: '0.3'
