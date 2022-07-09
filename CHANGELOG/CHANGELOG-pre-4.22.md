@@ -20,6 +20,10 @@ The referenced container images changed.
 ### Modification of files
 The referenced container images changed.
 
+In addition, the `nlp-matcher` component we have introduced with our `v4.9.0` release is no longer an opt-in but required. Please make sure that you read the changelog item of the `v4.9.0` release carefully in order to make sure that you have a fully working system.
+
+**Important: Not following these instructions will produce a situation where your Virtual Agents might not respond.**
+
 ## 4.19.1
 ### Modification of files
 The referenced container images changed.
