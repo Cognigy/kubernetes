@@ -22,6 +22,12 @@ To deploy traefik CRDs:
 ```bash 
 kubectl apply -f kubernetes/core/manifests/reverse-proxy/deployments/traefik-crd.yaml
 ```
+Afterwards, please add the additional CRDs in the `kustomization.yaml`
+```bash
+- manifests/reverse-proxy/deployments/traefik-crd.yaml
+- manifests/reverse-proxy/deployments/traefik_tlsoption.yaml
+- manifests/reverse-proxy/deployments/traefik-middleware-ipwhitelist.yaml
+```
 
 **Important: Please make sure that you deploy these CRDs before starting to upgrade Cognigy.AI, as the CRs (Custom Resources) will be applied and Kubernetes won't know them by default. Connectivity will not work without the CRDs to be present in your cluster!**
 
