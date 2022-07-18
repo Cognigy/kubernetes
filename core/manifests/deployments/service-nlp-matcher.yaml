@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-matcher
-          image: cognigydevelopment.azurecr.io/service-nlp-matcher:801bfeaae149ca52d13157f5fdefd439d5119ef1
+          image: cognigy.azurecr.io/service-nlp-matcher:801bfeaae149ca52d13157f5fdefd439d5119ef1
           resources:
             requests:
               cpu: '0.2'
