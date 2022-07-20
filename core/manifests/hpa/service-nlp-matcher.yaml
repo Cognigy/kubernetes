@@ -2,11 +2,11 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: service-nlp-score-en
+  name: service-nlp-matcher
 spec:
   scaleTargetRef:
     kind: Deployment
-    name: service-nlp-score-en
+    name: service-nlp-matcher
     apiVersion: apps/v1
   minReplicas: 2
   maxReplicas: 10

@@ -2,11 +2,11 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: service-nlp-score-en
+  name: service-session-state-manager
 spec:
   scaleTargetRef:
     kind: Deployment
-    name: service-nlp-score-en
+    name: service-session-state-manager
     apiVersion: apps/v1
   minReplicas: 2
   maxReplicas: 10
