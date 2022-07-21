@@ -15,14 +15,13 @@ spec:
       containers:
         - name: service-nlp-qa-en
           image: cognigydevelopment.azurecr.io/service-nlp-qa-en:4a46b8f8770c2d0e96f128e14e62fab30d6b1904
-          imagePullPolicy: Always
           resources:
             requests:
               cpu: '1'
-              memory: 3G
+              memory: 1.5G
             limits:
               cpu: '1'
-              memory: 3G
+              memory: 1.5G
           ports:
             - name: metrics
               containerPort: 8002
