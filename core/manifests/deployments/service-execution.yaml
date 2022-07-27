@@ -17,10 +17,10 @@ spec:
           image: cognigy.azurecr.io/service-execution:e8e8894d151878aaf286c6e3ceda2e40eb546c5a
           resources:
             requests:
-              cpu: '0.500'
+              cpu: '1'
               memory: 240M
             limits:
-              cpu: '0.500'
+              cpu: '1'
               memory: 300M
           ports:
             - name: metrics
