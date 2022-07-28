@@ -8,7 +8,7 @@ With release `4.30.0` we have started to mark this repository as `deprecated`. I
 The referenced container images have changed.
 
 ## Stateful services
-In release `4.30.2` we have updated the rabbitMQ from v3.8.3 to v3.9.20. There might be a service fluctuation for few seconds. Once the new rabbitMQ pod starts, please restart all the services in order to establish the inter component communication properly. 
+To improve the functionality and reduce the number of vulnerabilities, in the release `4.30.2` we have updated the Redis from v5.0.8 to v5.0.14 and RabbitMQ from v3.8.3 to v3.9.20. There might be a service fluctuation for a few seconds. Once the new RabbitMQ pod is up and running, in order to establish the inter component communication properly, please restart all the Cognigy services.
 
 
 You can use the following command with proper namespace to restart the services
