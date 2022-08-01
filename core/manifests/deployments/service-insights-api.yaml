@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: service-insights-api
-          image: cognigy.azurecr.io/service-insights-api:4249518-1658326040
+          image: cognigy.azurecr.io/service-insights-api:release-5a61dd3-1659099055
           resources:
-              requests:
-                cpu: '0.1'
-                memory: 60M
-              limits:
-                cpu: '0.1'
-                memory: 75M 
+            requests:
+              cpu: '0.1'
+              memory: 60M
+            limits:
+              cpu: '0.1'
+              memory: 75M
           ports:
             - name: metrics
               containerPort: 8002

@@ -33,7 +33,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cognigy-insights-jwt
-                  key: secret 
+                  key: secret
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
