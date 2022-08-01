@@ -23,6 +23,9 @@
   path: /data/BACKEND_BASE_URL_WITH_PROTOCOL
   value: "http://api"
 - op: add
+  path: /data/INSIGHTS_BACKEND_BASE_URL_WITH_PROTOCOL
+  value: "http://insights-api"
+- op: add
   path: /data/ENDPOINT_BASE_URL_WITH_PROTOCOL
   value: "http://endpoint"
 - op: add

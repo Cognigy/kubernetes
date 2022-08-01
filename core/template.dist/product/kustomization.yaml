@@ -11,6 +11,8 @@ resources:
 - manifests/services/service-endpoint.yaml
 - manifests/services/service-ui.yaml
 - manifests/services/service-webchat.yaml
+- manifests/services/service-insights-api.yaml
+- manifests/services/service-insights-ui.yaml
 
 # nlp deployments
 # for languages: de-DE
@@ -67,17 +69,23 @@ resources:
 - manifests/deployments/service-trainer.yaml
 - manifests/deployments/service-ui.yaml
 - manifests/deployments/service-webchat.yaml
+- manifests/deployments/service-insights-api.yaml
+- manifests/deployments/service-insights-ui.yaml
 
 # reverse proxy
 - manifests/reverse-proxy/deployments/traefik.yaml
 - manifests/reverse-proxy/deployments/traefik-crd.yaml
 - manifests/reverse-proxy/deployments/traefik_tlsoption.yaml
 - manifests/reverse-proxy/deployments/traefik-middleware-ipwhitelist.yaml
+
 - manifests/reverse-proxy/ingress/service-analytics-odata.yaml
 - manifests/reverse-proxy/ingress/service-api.yaml
 - manifests/reverse-proxy/ingress/service-endpoint.yaml
 - manifests/reverse-proxy/ingress/service-ui.yaml
 - manifests/reverse-proxy/ingress/service-webchat.yaml
+- manifests/reverse-proxy/ingress/service-insights-api.yaml
+- manifests/reverse-proxy/ingress/service-insights-ui.yaml
+
 - manifests/reverse-proxy/services/traefik.yaml
 
 patchesJson6902:
@@ -123,6 +131,13 @@ patchesJson6902:
     kind: Ingress
     name: service-webchat
   path: overlays/reverse-proxy/ingress/service-webchat_patch.yaml
+
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
+    name: service-insights-api
+  path: overlays/reverse-proxy/ingress/service-insights-api_patch.yaml
 
 # services
 - target:

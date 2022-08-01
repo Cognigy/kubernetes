@@ -29,6 +29,11 @@ spec:
             - configMapRef:
                 name: cognigy-env
           env:
+            - name: INSIGHTS_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-insights-jwt
+                  key: secret 
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
