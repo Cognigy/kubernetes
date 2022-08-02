@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mongo-server
-          image: cognigy.azurecr.io/mongo:4.2.5_cognigy-4.X
+          image: cognigy.azurecr.io/mongo:4.2.21_cognigy-4.X
           args: ["--auth", "--replSet=rs0"]
           resources:
             limits:
