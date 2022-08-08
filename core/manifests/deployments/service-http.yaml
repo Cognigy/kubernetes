@@ -20,8 +20,8 @@ spec:
               cpu: '0.1'
               memory: 60M
             limits:
-              cpu: '0.1'
-              memory: 75M
+              cpu: '0.3'
+              memory: 150M
           ports:
             - name: metrics
               containerPort: 8002
