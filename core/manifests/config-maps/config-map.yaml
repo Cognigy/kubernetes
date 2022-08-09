@@ -86,4 +86,7 @@ data:
 
   # Default to 2h => 120min
   DELETE_ORGANIZATION_TOKEN_TTL_IN_MINUTES: "120"
- 
+
+  # VoiceGateway
+  VOICE_GATEWAY_BASE_URL_WITH_PROTOCOL: "https://voicegateway-web-dev-vg.cognigy.ai/"
+  VOICE_TEST_CALL_API_SECRET: "some-key"
