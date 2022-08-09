@@ -20,7 +20,7 @@ spec:
               cpu: '0.2'
               memory: 120M
             limits:
-              cpu: '0.2'
+              cpu: '0.3'
               memory: 150M
           ports:
             - name: metrics
