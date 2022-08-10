@@ -189,8 +189,9 @@ Please **double check** all changes above. If everything looks good, you can go 
 To improve the functionality and fix known security vulnerabilities in the dependencies Cognigy.AI/Cognigy Insights uses, we have updated the following dependencies:
 - Redis, from `v5.0.8` to `v5.0.14`
 - RabbitMQ, from `v3.8.3` to `v3.9.20`
+- MongoDB, from `v4.2.5` to `v4.2.21`
 
-Updating to this release requires you to update these `stateful services`. Doing this will require restating all application Pods and will come with a couple of seconds of downtime. In order to restart all Pods after you have updated RabbitMQ, Redis and Redis-persistent, you can use the following command:
+Updating to this release requires you to update these `stateful services`. Doing this will require restating all application Pods and will come with a couple of seconds of downtime. In order to restart all Pods after you have updated MongoDB, RabbitMQ, Redis and Redis-persistent, you can use the following command:
 
 ```bash
 for i in $(kubectl get deployment --namespace <target_namespace> --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}'|grep service-)
