@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: cognigy.azurecr.io/service-endpoint:e8e8894d151878aaf286c6e3ceda2e40eb546c5a
+          image: cognigy.azurecr.io/service-endpoint:a5ebfe6785f1f37b414e8b096455d9b74c5e925d
           resources:
             requests:
               cpu: '0.2'
               memory: 120M
             limits:
-              cpu: '0.2'
+              cpu: '0.3'
               memory: 150M
           ports:
             - name: metrics

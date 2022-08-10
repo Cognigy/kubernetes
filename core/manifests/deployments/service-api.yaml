@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-api
-          image: cognigy.azurecr.io/service-api:e8e8894d151878aaf286c6e3ceda2e40eb546c5a
+          image: cognigy.azurecr.io/service-api:a5ebfe6785f1f37b414e8b096455d9b74c5e925d
           resources:
             requests:
               cpu: '0.2'
               memory: 280M
             limits:
-              cpu: '0.2'
+              cpu: '0.4'
               memory: 350M
           ports:
             - name: metrics
@@ -29,6 +29,11 @@ spec:
             - configMapRef:
                 name: cognigy-env
           env:
+            - name: INSIGHTS_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-insights-jwt
+                  key: secret
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

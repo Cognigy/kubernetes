@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-insights-ui
+  annotations:
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.middlewares: default-ipwhitelist@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+  - secretName: cognigy-traefik
+  rules:
+  - host: ui
+    http:
+      paths:
+      - backend:
+          service:
+            name: service-insights-ui
+            port:
+              number: 8000
+        path: /insights
+        pathType: Prefix

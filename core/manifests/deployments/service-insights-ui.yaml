@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-insights-ui
+spec:
+  selector:
+    matchLabels:
+      app: service-insights-ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-insights-ui
+    spec:
+      containers:
+        - name: service-insights-ui
+          image: cognigy.azurecr.io/service-insights-ui:release-2a77f34-1660120772
+          resources:
+            requests:
+              cpu: '0.1'
+              memory: 60M
+            limits:
+              cpu: '0.1'
+              memory: 75M
+          ports:
+            - name: metrics
+              containerPort: 8002
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+      imagePullSecrets:
+        - name: cognigy-registry-token

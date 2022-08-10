@@ -23,6 +23,9 @@
   path: /data/BACKEND_BASE_URL_WITH_PROTOCOL
   value: "http://api"
 - op: add
+  path: /data/INSIGHTS_BACKEND_BASE_URL_WITH_PROTOCOL
+  value: "http://insights-api"
+- op: add
   path: /data/ENDPOINT_BASE_URL_WITH_PROTOCOL
   value: "http://endpoint"
 - op: add
@@ -57,3 +60,8 @@
 - op: add
   path: /data/MAX_SESSION_STATE_TTL_IN_MINUTES
   value: "10080"
+
+# activate using the new insights ui
+- op: add
+  path: /data/FEATURE_USE_SERVICE_INSIGHTS_UI
+  value: "true"
