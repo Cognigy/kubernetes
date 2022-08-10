@@ -139,6 +139,13 @@ patchesJson6902:
     name: service-insights-api
   path: overlays/reverse-proxy/ingress/service-insights-api_patch.yaml
 
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
+    name: service-insights-api
+  path: overlays/reverse-proxy/ingress/service-insights-ui_patch.yaml
+
 # services
 - target:
     version: v1
