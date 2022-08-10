@@ -60,3 +60,8 @@
 - op: add
   path: /data/MAX_SESSION_STATE_TTL_IN_MINUTES
   value: "10080"
+
+# activate using the new insights ui
+- op: add
+  path: /data/FEATURE_USE_SERVICE_INSIGHTS_UI
+  value: "true"
