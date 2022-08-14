@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-insights-ui
-          image: 'cognigy.azurecr.io/service-insights-ui:'
+          image: "cognigy.azurecr.io/service-insights-ui:release-2a77f34-1660120772"
           resources:
             requests:
-              cpu: '0.1'
+              cpu: "0.1"
               memory: 60M
             limits:
-              cpu: '0.1'
+              cpu: "0.1"
               memory: 75M
           ports:
             - name: metrics
