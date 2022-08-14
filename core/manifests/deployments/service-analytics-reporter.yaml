@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-analytics-reporter
-          image: 'cognigy.azurecr.io/service-analytics-reporter:'
+          image: "cognigy.azurecr.io/service-analytics-reporter:df3c8bd-1657894925"
           resources:
             requests:
-              cpu: '0.5'
+              cpu: "0.5"
               memory: 500M
             limits:
-              cpu: '0.5'
+              cpu: "0.5"
               memory: 750M
           ports:
             - name: metrics
