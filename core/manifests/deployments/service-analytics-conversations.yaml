@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-analytics-conversations
-          image: cognigy.azurecr.io/service-analytics-conversations:release-a094611-1659099053
+          image: 'cognigy.azurecr.io/service-analytics-conversations:'
           resources:
             requests:
               cpu: '0.1'
