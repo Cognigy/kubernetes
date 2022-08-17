@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-analytics-collector
-          image: "cognigy.azurecr.io/service-analytics-collector:release-bd8e9d8-1659099054"
+          image: cognigy.azurecr.io/service-analytics-collector:release-bd8e9d8-1659099054
           resources:
             requests:
-              cpu: "0.300"
+              cpu: '0.300'
               memory: 160M
             limits:
-              cpu: "0.300"
+              cpu: '0.300'
               memory: 200M
           ports:
             - name: metrics

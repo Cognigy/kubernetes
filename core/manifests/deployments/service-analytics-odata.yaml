@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: service-analytics-odata
-          image: "cognigy.azurecr.io/service-analytics-odata:release-96b7f9f-1659099055"
+          image: cognigy.azurecr.io/service-analytics-odata:release-c01a936-1660729313
           resources:
             requests:
-              cpu: "0.1"
+              cpu: '0.1'
               memory: 360M
             limits:
-              cpu: "0.5"
+              cpu: '0.5'
               memory: 450M
           ports:
             - name: metrics
