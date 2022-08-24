@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-score-ko
-          image: cognigy.azurecr.io/service-nlp-ko:588f7ccfd173b76e974809e180d3ca6370a39c5a
+          image: cognigy.azurecr.io/service-nlp-ko:7a2242e6eb215f14116624f351486c6ed4b02e6f
           resources:
             requests:
               cpu: '0.350'
