@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-insights-ui
-          image: cognigy.azurecr.io/service-insights-ui:release-2a77f34-1660120772
+          image: cognigy.azurecr.io/service-insights-ui:release-91eddec-1660559908
           resources:
             requests:
               cpu: '0.1'
