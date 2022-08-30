@@ -22,6 +22,9 @@ spec:
             limits:
               cpu: '1'
               memory: 300M
+          env:
+            - name: RABBITMQ_ENABLE_RECONNECT
+              value: "true"              
           ports:
             - name: metrics
               containerPort: 8002

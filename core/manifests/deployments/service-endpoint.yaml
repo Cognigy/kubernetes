@@ -49,6 +49,10 @@ spec:
                 secretKeyRef:
                   name: cognigy-live-agent-credentials
                   key: cognigy-live-agent-platform-token
+            - name: REDIS_ENABLE_RECONNECT
+              value: "true"
+            - name: RABBITMQ_ENABLE_RECONNECT
+              value: "true"                  
           volumeMounts:
             - name: redis-persistent-password
               mountPath: /var/run/secrets/redis-persistent-password.conf
