@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-nlp-v2-train-ja
+spec:
+  selector:
+    matchLabels:
+      app: service-nlp-v2-train-ja
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-nlp-v2-train-ja
+    spec:
+      containers:
+        - name: service-nlp-v2-train-ja
+          image: cognigy.azurecr.io/service-nlp-v2-ja:588f7ccfd173b76e974809e180d3ca6370a39c5a
+          resources:
+            requests:
+              cpu: '0.350'
+              memory: 960M
+            limits:
+              cpu: '1'
+              memory: 2500M
+          ports:
+            - name: metrics
+              containerPort: 8002
+          volumeMounts:
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
+            - name: local
+              mountPath: /data/local
+            - name: redis-password
+              mountPath: /var/run/secrets/redis-password.conf
+              subPath: redis-password.conf
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001              
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8001
+            failureThreshold: 1
+            initialDelaySeconds: 120
+            periodSeconds: 60
+            timeoutSeconds: 60
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          env:
+            - name: LANGUAGES_TO_RUN
+              value: ja-JP
+            - name: TRAIN
+              value: 'true'
+      volumes:
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+        - name: mongodb-connection-string
+          secret:
+            secretName: cognigy-service-nlp
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
+        - name: local
+          emptyDir: {}
+        - name: redis-password
+          secret:
+            secretName: cognigy-redis-password
+      imagePullSecrets:
+        - name: cognigy-registry-token
