@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: clamd
+spec:
+  selector:
+    matchLabels:
+      app: clamd
+  template:
+    metadata:
+      labels:
+        app: clamd
+    spec:
+      volumes:
+        - name: host
+          hostPath:
+            path: /
+        - name: clamdb
+          emptyDir:
+        - name: etc
+          configMap:
+            name: clamav
+      initContainers:
+        - name: init
+          image: filefrog/clamav:latest
+          imagePullPolicy: Always
+          command:
+            - /clamav
+            - seed
+          volumeMounts:
+            - name: etc
+              mountPath: /etc/clamav
+              readOnly: yes
+            - name: clamdb
+              mountPath: /var/lib/clamav
+              readOnly: no
+      containers:
+        - name: clamd
+          image: filefrog/clamav:latest
+          imagePullPolicy: Always
+          command:
+            - /clamav
+            - clamd
+          securityContext:
+            capabilities:
+              add: [SYS_ADMIN, SYS_PTRACE]
+          readinessProbe:
+            periodSeconds: 3
+            tcpSocket:
+              port: 3310
+          volumeMounts:
+            - name: etc
+              mountPath: /etc/clamav
+              readOnly: yes
+            - name: host
+              mountPath: /host
+              readOnly: yes
+            - name: clamdb
+              mountPath: /var/lib/clamav
+              readOnly: yes
+        - name: freshclam
+          image: filefrog/clamav:latest
+          imagePullPolicy: Always
+          command:
+            - /clamav
+            - freshclam
+          volumeMounts:
+            - name: etc
+              mountPath: /etc/clamav
+              readOnly: yes
+            - name: clamdb
+              mountPath: /var/lib/clamav
+              readOnly: no

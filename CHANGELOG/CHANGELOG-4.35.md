@@ -33,3 +33,31 @@ We have also added environment variables for Redis + RabbitMQ reconnection logic
 - service-profiles
 - service-resources
 - service-session-state-manager
+
+## Preparing upcoming services
+We will release new services soon. As preparation we've already added the required files.
+Please **do not add** any of these to your **kustomization.yaml** yet!
+```yaml
+# services
+- manifests/services/service-runtime-file-manager.yaml
+- manifests/services/clamd.yaml
+
+# deployments
+- manifests/deployments/service-runtime-file-manager.yaml
+
+# ingress
+- manifests/reverse-proxy/ingress/service-runtime-file-manager.yaml
+
+# config-maps
+- manifests/config-maps/clamav.yaml
+
+# daemon sets
+- manifests/daemon-sets/clamd.yaml
+
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
+    name: service-runtime-file-manager
+  path: overlays/reverse-proxy/ingress/service-runtime-file-manager_patch.yaml
+```

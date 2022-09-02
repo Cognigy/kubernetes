@@ -4,10 +4,6 @@ metadata:
   name: service-static-files
   labels:
     app: service-static-files
-  annotations:    
-    traefik.ingress.kubernetes.io/affinity: "true"
-    traefik.ingress.kubernetes.io/session-secure: "true"
-    traefik.ingress.kubernetes.io/session-same-site: "none"
 spec:
   ports:
     - name: service-static-files

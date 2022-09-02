@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: service-app-session-manager
+  name: service-runtime-file-manager
   annotations:
     # kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
@@ -11,12 +11,12 @@ spec:
   tls:
     - secretName: cognigy-traefik
   rules:
-    - host: apps
+    - host: files
       http:
         paths:
           - backend:
               service:
-                name: service-app-session-manager
+                name: service-runtime-file-manager
                 port:
                   number: 8000
             path: /
