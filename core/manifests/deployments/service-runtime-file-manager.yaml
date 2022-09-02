@@ -28,6 +28,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: RUNTIME_FILE_MANAGER_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-jwt
+                  key: secret
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
