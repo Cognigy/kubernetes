@@ -30,10 +30,7 @@
   value: "http://endpoint"
 - op: add
   path: /data/RUNTIME_FILE_MANAGER_BASE_URL_WITH_PROTOCOL
-  value: "http://files"
-- op: add
-  path: /data/STATIC_FILES_URL_WITH_PROTOCOL
-  value: "http://static"
+  value: "http://files-api"
 - op: add
   path: /data/WEBCHAT_BASE_URL_WITH_PROTOCOL
   value: "http://webchat"

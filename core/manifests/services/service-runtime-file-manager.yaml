@@ -9,6 +9,6 @@ spec:
     - name: service-runtime-file-manager
       port: 8000
       targetPort: 8000
-      protocol: TCP    
+      protocol: TCP
   selector:
     app: service-runtime-file-manager
