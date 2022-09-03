@@ -9,6 +9,6 @@ spec:
     - name: service-static-files
       port: 8000
       targetPort: 80
-      protocol: TCP    
+      protocol: TCP
   selector:
     app: service-static-files

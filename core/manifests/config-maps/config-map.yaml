@@ -51,11 +51,16 @@ data:
   # DNS names
   FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
   BACKEND_BASE_URL_WITH_PROTOCOL: http://api
-  MANAGEMENTUI_BASE_URL_WITH_PROTOCOL: http://management-ui
+  INSIGHTS_BACKEND_BASE_URL_WITH_PROTOCOL: http://insights-api
   ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
+  RUNTIME_FILE_MANAGER_BASE_URL_WITH_PROTOCOL: http://files
   WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
+  APPS_BASE_URL_WITH_PROTOCOL: http://apps
+  STATIC_FILES_URL_WITH_PROTOCOL: http://static
   ENDPOINT_BASE_URL: http://endpoint
   ODATA_HOSTNAME: odata
+
+  MANAGEMENTUI_BASE_URL_WITH_PROTOCOL: http://management-ui
 
   # Endpoint configuration for Alexa
   ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"

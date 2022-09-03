@@ -13,9 +13,19 @@ spec:
         app: service-static-files
     spec:
       containers:
-        - image: cognigy.azurecr.io/service-static-files:0ad6deac4e6bf5c20682b59342d1f4a410079ced
-          name: service-static-files
+        - name: service-static-files
+          image: cognigy.azurecr.io/service-static-files:0ad6deac4e6bf5c20682b59342d1f4a410079ced
           ports:
             - containerPort: 80
+          resources:
+            requests:
+              cpu: '0.4'
+              memory: 400M
+            limits:
+              cpu: '0.4'
+              memory: 500M
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
       imagePullSecrets:
         - name: cognigy-registry-token

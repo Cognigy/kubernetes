@@ -8,6 +8,8 @@ With release `4.30.0` we have started to mark this repository as `deprecated`. I
 The referenced container images have changed.
 
 
+Todo: Mention that Cognigy Apps assets are there but should not be used!
+
 ### New services
 You will see that this release introduces a new microservice:
 - service-runtime-file-manager
