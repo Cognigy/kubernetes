@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-http
-          image: cognigy.azurecr.io/service-http:109bcf8580b2068827cfab6133ec912b86c33ad3
+          image: cognigy.azurecr.io/service-http:f24cbed7ee3d7122d1a2b0d109a7440a833ce2a7
           resources:
             requests:
               cpu: '0.1'
