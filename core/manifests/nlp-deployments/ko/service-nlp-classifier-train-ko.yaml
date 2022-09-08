@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-v2-score-ko
+  name: service-nlp-classifier-train-ko
 spec:
   selector:
     matchLabels:
-      app: service-nlp-v2-score-ko
+      app: service-nlp-classifier-train-ko
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-v2-score-ko
+        app: service-nlp-classifier-train-ko
     spec:
       containers:
-        - name: service-nlp-v2-score-ko
-          image: cognigydevelopment.azurecr.io/service-nlp-v2-ko:1e5aa2b6a3c3b5bfb1ade344cdb57a7c20c730b7
+        - name: service-nlp-classifier-train-ko
+          image: cognigydevelopment.azurecr.io/service-nlp-classifier-ko:2c096224e1caf0fb96f2e4452b09640146f31489
           resources:
             requests:
               cpu: '0.350'
               memory: 960M
             limits:
-              cpu: '1'
-              memory: 2500M
+              cpu: '1.0'
+              memory: 960M
           ports:
             - name: metrics
               containerPort: 8002
@@ -29,6 +29,9 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
+            - name: mongodb-connection-string
+              mountPath: /var/run/secrets/mongodbConnectionString
+              subPath: mongodbConnectionString
             - name: local
               mountPath: /data/local
             - name: redis-password
@@ -38,6 +41,8 @@ spec:
             httpGet:
               path: /health/startup
               port: 8001
+            failureThreshold: 3
+            initialDelaySeconds: 10
           livenessProbe:
             httpGet:
               path: /health/liveness
@@ -52,7 +57,7 @@ spec:
           env:
             - name: LANGUAGES_TO_RUN
               value: ko-KR
-            - name: SCORE
+            - name: TRAIN
               value: 'true'
             - name: DEFAULT_EMBEDDING_MODEL
               value: usev3
@@ -63,6 +68,12 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
+        - name: mongodb-connection-string
+          secret:
+            secretName: cognigy-service-nlp
+            items:
+              - key: connection-string
+                path: mongodbConnectionString
         - name: local
           emptyDir: {}
         - name: redis-password

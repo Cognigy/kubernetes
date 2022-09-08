@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-v2-score-xx
-          image: cognigy.azurecr.io/service-nlp-v2:3834310fa70afcde94289076d305a8f9aeb10099
+          image: cognigydevelopment.azurecr.io/service-nlp-v2:79a6861b0b00f1903a3b57c708c797b7570d07b6
           resources:
             requests:
               cpu: '0.350'
@@ -29,9 +29,6 @@ spec:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
               subPath: rabbitmqConnectionString
-            - name: mongodb-connection-string
-              mountPath: /var/run/secrets/mongodbConnectionString
-              subPath: mongodbConnectionString
             - name: local
               mountPath: /data/local
             - name: redis-password
@@ -40,7 +37,7 @@ spec:
           startupProbe:
             httpGet:
               path: /health/startup
-              port: 8001              
+              port: 8001
           livenessProbe:
             httpGet:
               path: /health/liveness
@@ -57,6 +54,8 @@ spec:
               value: ar-AE,es-ES,fr-FR,nl-NL,it-IT,pl-PL,pt-PT,pt-BR,th-TH,ru-RU,tr-TR,zh-CN
             - name: SCORE
               value: 'true'
+            - name: DEFAULT_EMBEDDING_MODEL
+              value: usev3
       volumes:
         - name: rabbitmq-connection-string
           secret:
@@ -64,12 +63,6 @@ spec:
             items:
               - key: connection-string
                 path: rabbitmqConnectionString
-        - name: mongodb-connection-string
-          secret:
-            secretName: cognigy-service-nlp
-            items:
-              - key: connection-string
-                path: mongodbConnectionString
         - name: local
           emptyDir: {}
         - name: redis-password

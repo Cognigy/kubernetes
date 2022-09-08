@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-nlp-embedding
+spec:
+  selector:
+    matchLabels:
+      app: service-nlp-embedding
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-nlp-embedding
+    spec:
+      tolerations:
+        - key: nvidia.com/gpu
+          operator: Exists
+      containers:
+        - name: service-nlp-embedding
+          image: cognigydevelopment.azurecr.io/service-nlp-embedding:050bd83df931afdd648f0f8df789ead2646ff9c8
+          args:
+            - tritonserver
+            - '--model-repository=/models'
+            - '--model-control-mode=explicit'
+            - '--load-model=usev4'
+            - '--load-model=usev3'
+            - '--load-model=labse'
+            - '--strict-readiness=true'
+            - '--backend-config=tensorflow,version=2'
+            - '--response-cache-byte-size=0'
+            - '--log-verbose=1'
+            - '--log-info=true'
+            - '--log-warning=true'
+            - '--log-error=true'
+            - '--allow-grpc=false'
+            - '--allow-sagemaker=false'
+            - '--allow-vertex-ai=false'
+          resources:
+            requests:
+              cpu: 4
+              memory: 8Gi
+            limits:
+              cpu: 4
+              memory: 10Gi
+          ports:
+            - name: http
+              containerPort: 8000
+            - name: grpc
+              containerPort: 8001              
+            - name: metrics
+              containerPort: 8002
+          startupProbe:
+            httpGet:
+              path: /v2/health/ready
+              port: 8000
+            failureThreshold: 5
+            periodSeconds: 60
+          livenessProbe:
+            httpGet:
+              path: /v2/health/live
+              port: 8000
+            failureThreshold: 3
+            periodSeconds: 60
+            timeoutSeconds: 10
+            initialDelaySeconds: 90
+      imagePullSecrets:
+        - name: cognigy-registry-token

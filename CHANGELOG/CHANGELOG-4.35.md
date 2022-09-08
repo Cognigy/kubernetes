@@ -9,6 +9,8 @@ The referenced container images have changed.
 
 
 Todo: Mention that Cognigy Apps assets are there but should not be used!
+Todo: Mention that nlp-classifier services are there but should not be used!
+Todo: Mention that nlp-embedding service is there but should not be used!
 
 Todo: Mention that services nlp-v2 are there but should not be used!
 
