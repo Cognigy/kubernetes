@@ -10,6 +10,8 @@ The referenced container images have changed.
 
 Todo: Mention that Cognigy Apps assets are there but should not be used!
 
+Todo: Mention that services nlp-v2 are there but should not be used!
+
 ### New services
 You will see that this release introduces a new microservice:
 - service-runtime-file-manager
