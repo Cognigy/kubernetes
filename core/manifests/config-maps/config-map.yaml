@@ -91,4 +91,10 @@ data:
 
   # Default to 2h => 120min
   DELETE_ORGANIZATION_TOKEN_TTL_IN_MINUTES: "120"
- 
+
+  # VoiceGateway - Enable the below variables if the voice feature needs to be enabled
+  # VOICE_GATEWAY_BASE_URL_WITH_PROTOCOL: "https://voicegateway-web-dev-vg.cognigy.ai/"
+  # FEATURE_ENABLE_VOICEGATEWAY_2
+  # FEATURE_ENABLE_VOICEGATEWAY_2_WHITELIST
+  # VOICE_TEST_CALL_API_SECRET
+  # JWT_SECRET
