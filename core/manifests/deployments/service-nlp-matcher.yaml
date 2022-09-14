@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-matcher
-          image: cognigy.azurecr.io/service-nlp-matcher:4cb34fdc69dca2cb8fb295e379c3da9c9cabac4d
+          image: cognigy.azurecr.io/service-nlp-matcher:a63906993b9dee3c333aaf8377d4b545028e682b
           resources:
             requests:
               cpu: '0.2'
@@ -30,9 +30,9 @@ spec:
                 name: cognigy-env
           env:
             - name: REDIS_ENABLE_RECONNECT
-              value: "true"
+              value: 'true'
             - name: RABBITMQ_ENABLE_RECONNECT
-              value: "true"                
+              value: 'true'
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString
@@ -50,7 +50,7 @@ spec:
           startupProbe:
             httpGet:
               path: /health/startup
-              port: 8001              
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 30

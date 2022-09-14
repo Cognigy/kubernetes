@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-runtime-file-manager
-          image: cognigydevelopment.azurecr.io/service-runtime-file-manager:c51d23666a66d9c13415da6031a9ef763f06c155
+          image: cognigy.azurecr.io/service-runtime-file-manager:e26af2331fb17a82be462f98654879fd7d9242c5
           resources:
             requests:
               cpu: '0.4'

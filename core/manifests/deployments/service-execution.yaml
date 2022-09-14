@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-execution
-          image: cognigy.azurecr.io/service-execution:f24cbed7ee3d7122d1a2b0d109a7440a833ce2a7
+          image: cognigy.azurecr.io/service-execution:e26af2331fb17a82be462f98654879fd7d9242c5
           resources:
             requests:
               cpu: '1'
@@ -24,7 +24,7 @@ spec:
               memory: 300M
           env:
             - name: RABBITMQ_ENABLE_RECONNECT
-              value: "true"              
+              value: 'true'
           ports:
             - name: metrics
               containerPort: 8002

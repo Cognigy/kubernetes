@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-session-state-manager
-          image: cognigy.azurecr.io/service-session-state-manager:f24cbed7ee3d7122d1a2b0d109a7440a833ce2a7
+          image: cognigy.azurecr.io/service-session-state-manager:e26af2331fb17a82be462f98654879fd7d9242c5
           resources:
             requests:
               cpu: '0.4'
@@ -30,9 +30,9 @@ spec:
                 name: cognigy-env
           env:
             - name: REDIS_ENABLE_RECONNECT
-              value: "true"
+              value: 'true'
             - name: RABBITMQ_ENABLE_RECONNECT
-              value: "true"                
+              value: 'true'
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString

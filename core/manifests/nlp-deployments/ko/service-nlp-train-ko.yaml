@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ko
-          image: cognigy.azurecr.io/service-nlp-ko:1ce08b1783c5db5fb1d1a084facda3315c89a86c
+          image: cognigy.azurecr.io/service-nlp-ko:03aa80eb2f427f24e373a83df9a7e97bd97138b2
           resources:
             requests:
               cpu: '0.350'
@@ -40,7 +40,7 @@ spec:
           startupProbe:
             httpGet:
               path: /health/startup
-              port: 8001              
+              port: 8001
           livenessProbe:
             httpGet:
               path: /health/liveness

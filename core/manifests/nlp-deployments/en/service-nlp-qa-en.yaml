@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-qa-en
-          image: cognigy.azurecr.io/service-nlp-qa-en:48bb24506ecc279f6f5d6e1abbacb8995e04a57a
+          image: cognigy.azurecr.io/service-nlp-qa-en:62f3ea84a9561270a8eeeefb008473b903ff14e2
           resources:
             requests:
               cpu: '1'
@@ -37,7 +37,7 @@ spec:
           startupProbe:
             httpGet:
               path: /health/startup
-              port: 8001              
+              port: 8001
           livenessProbe:
             httpGet:
               path: /health/liveness
