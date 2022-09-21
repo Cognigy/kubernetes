@@ -7,16 +7,20 @@ With release `4.30.0` we have started to mark this repository as `deprecated`. I
 ## Cognigy.AI / Cognigy Insights (core)
 The referenced container images have changed.
 
+With this release we have added a lot of files to this repository which **you should not use in production, yet.** Those files e.g. are:
+- service-static-files
+- service-app-session-manager
+- service-nlp-classifier-score-{languageCode}
+- service-nlp-classifier-train-{languageCode}
+- service-nlp-v2-score-{languageCode}
+- service-nlp-v2-train-{languageCode}
 
-Todo: Mention that Cognigy Apps assets are there but should not be used!
-Todo: Mention that nlp-classifier services are there but should not be used!
-Todo: Mention that nlp-embedding service is there but should not be used!
-
-Todo: Mention that services nlp-v2 are there but should not be used!
+**We will announce all changes once these files should be used in production.**
 
 ### New services
 You will see that this release introduces a new microservice:
 - service-runtime-file-manager
+- clamd
 
 This microservices offers file-upload capabilities which are e.g. used in our new `Whatsapp Cloud` Endpoint. To prepare your installation, please follow these steps closely in order to make sure that the upgrade is smooth:
 
@@ -96,15 +100,9 @@ This microservices offers file-upload capabilities which are e.g. used in our ne
     ```yaml
     # deployments
     ...
+    - manifests/deployments/clamd.yaml
     - manifests/deployments/service-runtime-file-manager.yaml
     ...
-    ```
-
-    **Create a new section 'deamonsets' under the 'deployments' section:**
-
-    ```yaml
-    # daemon-sets
-    - manifests/daemon-sets/clamd.yaml
     ```
 
     **Add the following new Kubernetes ingress object into the 'reverse proxy' section:**
