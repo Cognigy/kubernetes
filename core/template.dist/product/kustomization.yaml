@@ -43,6 +43,7 @@ resources:
 # - manifests/nlp-deployments/xx/service-nlp-train-xx.yaml
 
 # deployments
+- manifests/deployments/clamd.yaml
 - manifests/deployments/service-ai.yaml
 - manifests/deployments/service-alexa-management.yaml
 - manifests/deployments/service-analytics-collector.yaml
@@ -75,9 +76,6 @@ resources:
 - manifests/deployments/service-webchat.yaml
 - manifests/deployments/service-insights-api.yaml
 - manifests/deployments/service-insights-ui.yaml
-
-# daemon-sets
-- manifests/daemon-sets/clamd.yaml
 
 # reverse proxy
 - manifests/reverse-proxy/deployments/traefik.yaml

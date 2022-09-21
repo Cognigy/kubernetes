@@ -9,6 +9,8 @@ data:
     Debug no
     LeaveTemporaryFiles no
 
+    StreamMaxLength 4096M
+
     LogFile /dev/stdout
     LogFileMaxSize 0
     LogTime yes

@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: DaemonSet
+kind: Deployment
 metadata:
   name: clamd
 spec:
   selector:
     matchLabels:
       app: clamd
+  replicas: 1
   template:
     metadata:
       labels:
@@ -30,13 +31,20 @@ spec:
           volumeMounts:
             - name: etc
               mountPath: /etc/clamav
-              readOnly: yes
+              readOnly: true
             - name: clamdb
               mountPath: /var/lib/clamav
-              readOnly: no
+              readOnly: false
       containers:
         - name: clamd
           image: filefrog/clamav:latest
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1700Mi
+            requests:
+              cpu: 800m
+              memory: 1400Mi
           imagePullPolicy: Always
           command:
             - /clamav
@@ -51,13 +59,13 @@ spec:
           volumeMounts:
             - name: etc
               mountPath: /etc/clamav
-              readOnly: yes
+              readOnly: true
             - name: host
               mountPath: /host
-              readOnly: yes
+              readOnly: true
             - name: clamdb
               mountPath: /var/lib/clamav
-              readOnly: yes
+              readOnly: false
         - name: freshclam
           image: filefrog/clamav:latest
           imagePullPolicy: Always
@@ -67,7 +75,7 @@ spec:
           volumeMounts:
             - name: etc
               mountPath: /etc/clamav
-              readOnly: yes
+              readOnly: true
             - name: clamdb
               mountPath: /var/lib/clamav
-              readOnly: no
+              readOnly: false
