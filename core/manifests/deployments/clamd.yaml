@@ -37,7 +37,7 @@ spec:
               readOnly: false
       containers:
         - name: clamd
-          image: cognigy.azurecr.io/clamd:f2d6b4dc6abeee7845f1926d208c26ad2b93a545
+          image: filefrog/clamav:latest
           resources:
             limits:
               cpu: 1000m
