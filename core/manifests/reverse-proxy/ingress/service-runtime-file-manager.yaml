@@ -11,7 +11,7 @@ spec:
   tls:
     - secretName: cognigy-traefik
   rules:
-    - host: files
+    - host: files-api
       http:
         paths:
           - backend:
