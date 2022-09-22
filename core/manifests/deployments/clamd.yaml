@@ -17,7 +17,7 @@ spec:
           hostPath:
             path: /
         - name: clamdb
-          emptyDir:
+          emptyDir: null
         - name: etc
           configMap:
             name: clamav
@@ -37,7 +37,7 @@ spec:
               readOnly: false
       containers:
         - name: clamd
-          image: filefrog/clamav:latest
+          image: cognigy.azurecr.io/clamd:f2d6b4dc6abeee7845f1926d208c26ad2b93a545
           resources:
             limits:
               cpu: 1000m
@@ -51,7 +51,9 @@ spec:
             - clamd
           securityContext:
             capabilities:
-              add: [SYS_ADMIN, SYS_PTRACE]
+              add:
+                - SYS_ADMIN
+                - SYS_PTRACE
           readinessProbe:
             periodSeconds: 3
             tcpSocket:
