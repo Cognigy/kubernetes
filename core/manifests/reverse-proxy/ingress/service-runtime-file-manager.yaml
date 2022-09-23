@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-runtime-file-manager
+  annotations:
+    # kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-ipwhitelist@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: cognigy-traefik
+  rules:
+    - host: files-api
+      http:
+        paths:
+          - backend:
+              service:
+                name: service-runtime-file-manager
+                port:
+                  number: 8000
+            path: /
+            pathType: Prefix

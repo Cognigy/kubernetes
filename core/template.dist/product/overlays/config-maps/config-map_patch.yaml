@@ -29,6 +29,9 @@
   path: /data/ENDPOINT_BASE_URL_WITH_PROTOCOL
   value: "http://endpoint"
 - op: add
+  path: /data/RUNTIME_FILE_MANAGER_BASE_URL_WITH_PROTOCOL
+  value: "http://files-api"
+- op: add
   path: /data/WEBCHAT_BASE_URL_WITH_PROTOCOL
   value: "http://webchat"
 - op: add
@@ -36,7 +39,15 @@
   value: "odata"
 - op: add
   path: /data/ODATA_PROTOCOL
-  value: "http"  
+  value: "http"
+
+# Please don't use the following two ENV variables, yet
+# - op: add
+#   path: /data/APPS_BASE_URL_WITH_PROTOCOL
+#   value: "http://apps"
+# - op: add
+#   path: /data/STATIC_FILES_URL_WITH_PROTOCOL
+#   value: "http://static"
 
 # INTERNAL API for management ui
 # - op: add

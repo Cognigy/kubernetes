@@ -1,15 +1,23 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: service-static-files
-    annotations:
-        kubernetes.io/ingress.class: traefik        
+  name: service-static-files
+  annotations:
+    # kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-ipwhitelist@kubernetescrd
 spec:
-    rules:
+  ingressClassName: traefik
+  tls:
+    - secretName: cognigy-traefik
+  rules:
     - host: static
       http:
         paths:
-        - path: /
-          backend:
-              serviceName: service-static-files
-              servicePort: 8000   
+          - backend:
+              service:
+                name: service-static-files
+                port:
+                  number: 8000
+            path: /
+            pathType: Prefix

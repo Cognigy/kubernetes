@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-ai
-          image: cognigy.azurecr.io/service-ai:f24cbed7ee3d7122d1a2b0d109a7440a833ce2a7
+          image: cognigy.azurecr.io/service-ai:f2d6b4dc6abeee7845f1926d208c26ad2b93a545
           resources:
             requests:
               cpu: '0.4'
@@ -28,6 +28,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: REDIS_ENABLE_RECONNECT
+              value: 'true'
+            - name: RABBITMQ_ENABLE_RECONNECT
+              value: 'true'
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString

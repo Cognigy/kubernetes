@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 # config-maps
 - manifests/config-maps/config-map.yaml
+- manifests/config-maps/clamav.yaml
 
 # services
 - manifests/services/service-analytics-odata.yaml
@@ -13,6 +14,8 @@ resources:
 - manifests/services/service-webchat.yaml
 - manifests/services/service-insights-api.yaml
 - manifests/services/service-insights-ui.yaml
+- manifests/services/clamd.yaml
+- manifests/services/service-runtime-file-manager.yaml
 
 # nlp deployments
 # for languages: de-DE
@@ -40,6 +43,7 @@ resources:
 # - manifests/nlp-deployments/xx/service-nlp-train-xx.yaml
 
 # deployments
+- manifests/deployments/clamd.yaml
 - manifests/deployments/service-ai.yaml
 - manifests/deployments/service-alexa-management.yaml
 - manifests/deployments/service-analytics-collector.yaml
@@ -63,6 +67,7 @@ resources:
 - manifests/deployments/service-playbook-execution.yaml
 - manifests/deployments/service-profiles.yaml
 - manifests/deployments/service-resources.yaml
+- manifests/deployments/service-runtime-file-manager.yaml
 - manifests/deployments/service-security.yaml
 - manifests/deployments/service-session-state-manager.yaml
 - manifests/deployments/service-task-manager.yaml
@@ -85,6 +90,7 @@ resources:
 - manifests/reverse-proxy/ingress/service-webchat.yaml
 - manifests/reverse-proxy/ingress/service-insights-api.yaml
 - manifests/reverse-proxy/ingress/service-insights-ui.yaml
+- manifests/reverse-proxy/ingress/service-runtime-file-manager.yaml
 
 - manifests/reverse-proxy/services/traefik.yaml
 
@@ -145,6 +151,13 @@ patchesJson6902:
     kind: Ingress
     name: service-insights-ui
   path: overlays/reverse-proxy/ingress/service-insights-ui_patch.yaml
+
+- target:
+    group: networking.k8s.io
+    version: v1
+    kind: Ingress
+    name: service-runtime-file-manager
+  path: overlays/reverse-proxy/ingress/service-runtime-file-manager_patch.yaml
 
 # services
 - target:

@@ -1,15 +1,23 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: service-app-session-manager
   annotations:
-    kubernetes.io/ingress.class: traefik
+    # kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.middlewares: default-ipwhitelist@kubernetescrd
 spec:
+  ingressClassName: traefik
+  tls:
+    - secretName: cognigy-traefik
   rules:
     - host: apps
       http:
         paths:
-          - path: /
-            backend:
-              serviceName: service-app-session-manager
-              servicePort: 8000          
+          - backend:
+              service:
+                name: service-app-session-manager
+                port:
+                  number: 8000
+            path: /
+            pathType: Prefix

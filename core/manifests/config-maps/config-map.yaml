@@ -51,11 +51,18 @@ data:
   # DNS names
   FRONTEND_BASE_URL_WITH_PROTOCOL: http://ui
   BACKEND_BASE_URL_WITH_PROTOCOL: http://api
-  MANAGEMENTUI_BASE_URL_WITH_PROTOCOL: http://management-ui
+  INSIGHTS_BACKEND_BASE_URL_WITH_PROTOCOL: http://insights-api
   ENDPOINT_BASE_URL_WITH_PROTOCOL: http://endpoint
+  RUNTIME_FILE_MANAGER_BASE_URL_WITH_PROTOCOL: http://files-api
   WEBCHAT_BASE_URL_WITH_PROTOCOL: http://webchat
   ENDPOINT_BASE_URL: http://endpoint
   ODATA_HOSTNAME: odata
+
+  # Please don't use the following two ENV variables, yet
+  # APPS_BASE_URL_WITH_PROTOCOL: http://apps
+  # STATIC_FILES_URL_WITH_PROTOCOL: http://static
+
+  MANAGEMENTUI_BASE_URL_WITH_PROTOCOL: http://management-ui
 
   # Endpoint configuration for Alexa
   ALEXA_END_SESSION_AFTER_EACH_REPLY: "true"
@@ -86,4 +93,10 @@ data:
 
   # Default to 2h => 120min
   DELETE_ORGANIZATION_TOKEN_TTL_IN_MINUTES: "120"
- 
+
+  # VoiceGateway - Enable the below variables if the voice feature needs to be enabled
+  # VOICE_GATEWAY_BASE_URL_WITH_PROTOCOL: "https://voicegateway-web-dev-vg.cognigy.ai/"
+  # FEATURE_ENABLE_VOICEGATEWAY_2
+  # FEATURE_ENABLE_VOICEGATEWAY_2_WHITELIST
+  # VOICE_TEST_CALL_API_SECRET
+  # JWT_SECRET

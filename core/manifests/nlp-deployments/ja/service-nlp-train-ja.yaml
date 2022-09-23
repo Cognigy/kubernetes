@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-train-ja
-          image: cognigy.azurecr.io/service-nlp-ja:1ce08b1783c5db5fb1d1a084facda3315c89a86c
+          image: cognigy.azurecr.io/service-nlp-ja:03aa80eb2f427f24e373a83df9a7e97bd97138b2
           resources:
             requests:
               cpu: '0.350'
@@ -37,9 +37,13 @@ spec:
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
           livenessProbe:
             httpGet:
-              path: /
+              path: /health/liveness
               port: 8001
             failureThreshold: 1
             initialDelaySeconds: 120
