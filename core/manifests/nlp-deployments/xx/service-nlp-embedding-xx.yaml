@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-nlp-embedding-xx
+spec:
+  selector:
+    matchLabels:
+      app: service-nlp-embedding-xx
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-nlp-embedding-xx
+    spec:
+      containers:
+        - name: service-nlp-embedding-xx
+          image: cognigydevelopment.azurecr.io/service-nlp-embedding-xx:458b2e4f6ceb9f8eda91a0b68f8ad255c1b8f030
+          args:
+            - tritonserver
+            - '--model-repository=/models'
+            - '--model-control-mode=explicit'
+            - '--load-model=usev3'
+            - '--strict-readiness=true'
+            - '--backend-config=tensorflow,version=2'
+            - '--response-cache-byte-size=0'
+            - '--log-verbose=1'
+            - '--log-info=true'
+            - '--log-warning=true'
+            - '--log-error=true'
+            - '--allow-grpc=false'
+            - '--allow-sagemaker=false'
+            - '--allow-vertex-ai=false'
+          resources:
+            requests:
+              cpu: 1
+              memory: 1.2Gi
+            limits:
+              cpu: 2
+              memory: 2Gi
+          ports:
+            - name: http
+              containerPort: 8000
+            - name: metrics
+              containerPort: 8002
+          startupProbe:
+            httpGet:
+              path: /v2/health/ready
+              port: 8000
+            failureThreshold: 5
+            periodSeconds: 60
+          livenessProbe:
+            httpGet:
+              path: /v2/health/live
+              port: 8000
+            failureThreshold: 3
+            periodSeconds: 60
+            timeoutSeconds: 10
+            initialDelaySeconds: 90
+          volumeMounts:
+          - name: model-config
+            mountPath: /models/usev3/config.pbtxt
+            subPath: usev3-config
+      volumes:
+        - name: model-config
+          configMap:
+            name: embedding-model-config
+      imagePullSecrets:
+        - name: cognigy-registry-token

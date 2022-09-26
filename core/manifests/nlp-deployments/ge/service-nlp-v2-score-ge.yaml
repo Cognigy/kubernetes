@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-v2-score-ge
-          image: cognigy.azurecr.io/service-nlp-v2-score-ge:01eadeee9b08f63b4990a611e4f751e874236a2f
+          image: cognigydevelopment.azurecr.io/service-nlp-v2-ge:1875625bc03757cbf195447869fb0b64e578b19b
           resources:
             requests:
               cpu: '0.350'
@@ -34,6 +34,9 @@ spec:
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
+            - name: model-config
+              mountPath: /models/labse/config.pbtxt
+              subPath: labse-config
           startupProbe:
             httpGet:
               path: /health/startup
@@ -56,6 +59,12 @@ spec:
               value: 'true'
             - name: DEFAULT_EMBEDDING_MODEL
               value: labse
+            - name: MODEL_CONFIG_FILE
+              value: /models/labse/config.pbtxt
+            - name: EMBEDDING_SERVER_ADDRESS
+              value: service-nlp-embedding-ge:8000
+            - name: LABSE_VOCAB_FILE
+              value: /labse_vocab/cased_vocab.txt
       volumes:
         - name: rabbitmq-connection-string
           secret:
@@ -68,5 +77,8 @@ spec:
         - name: redis-password
           secret:
             secretName: cognigy-redis-password
+        - name: model-config
+          configMap:
+            name: embedding-model-config
       imagePullSecrets:
         - name: cognigy-registry-token
