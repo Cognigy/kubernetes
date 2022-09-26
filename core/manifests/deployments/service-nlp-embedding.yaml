@@ -17,7 +17,7 @@ spec:
           operator: Exists
       containers:
         - name: service-nlp-embedding
-          image: cognigy.azurecr.io/service-nlp-embedding:b6151eecaa59a8923db6cc8303a4d00f91153c43
+          image: cognigy.azurecr.io/service-nlp-embedding:e10a4724e4aeb347a20d67c0ac42fdf65e19cba3
           args:
             - tritonserver
             - '--model-repository=/models'

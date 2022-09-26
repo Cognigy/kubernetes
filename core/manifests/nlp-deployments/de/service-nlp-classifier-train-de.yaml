@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-classifier-train-de
-          image: cognigydevelopment.azurecr.io/service-nlp-classifier:1875625bc03757cbf195447869fb0b64e578b19b
+          image: cognigy.azurecr.io/service-nlp-classifier:d325a94f55009db0e7e1fb7113722d770a7e8ffa
           resources:
             requests:
               cpu: '0.350'
@@ -39,7 +39,7 @@ spec:
               subPath: redis-password.conf
             - name: model-config
               mountPath: /models/usev3/config.pbtxt
-              subPath: usev3-config              
+              subPath: usev3-config
           startupProbe:
             httpGet:
               path: /health/startup
