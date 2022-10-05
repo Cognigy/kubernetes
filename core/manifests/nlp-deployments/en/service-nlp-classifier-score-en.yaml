@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-classifier-score-en
-          image: cognigy.azurecr.io/service-nlp-classifier-score-en:9b35ceebd01b518ab3cc842444fee5c6276381e3
+          image: cognigy.azurecr.io/service-nlp-classifier-en:d325a94f55009db0e7e1fb7113722d770a7e8ffa
           resources:
             requests:
               cpu: '0.350'
@@ -37,6 +37,9 @@ spec:
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf
               subPath: redis-password.conf
+            - name: model-config
+              mountPath: /models/usev4/config.pbtxt
+              subPath: usev4-config
           startupProbe:
             httpGet:
               path: /health/startup
@@ -59,6 +62,10 @@ spec:
               value: 'true'
             - name: DEFAULT_EMBEDDING_MODEL
               value: usev4
+            - name: MODEL_CONFIG_FILE
+              value: /models/usev4/config.pbtxt
+            - name: EMBEDDING_SERVER_ADDRESS
+              value: service-nlp-embedding-en:8000
       volumes:
         - name: rabbitmq-connection-string
           secret:
@@ -77,5 +84,8 @@ spec:
         - name: redis-password
           secret:
             secretName: cognigy-redis-password
+        - name: model-config
+          configMap:
+            name: embedding-model-config
       imagePullSecrets:
         - name: cognigy-registry-token

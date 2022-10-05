@@ -1,30 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-nlp-embedding
+  name: service-nlp-embedding-xx
 spec:
   selector:
     matchLabels:
-      app: service-nlp-embedding
+      app: service-nlp-embedding-xx
   replicas: 1
   template:
     metadata:
       labels:
-        app: service-nlp-embedding
+        app: service-nlp-embedding-xx
     spec:
-      tolerations:
-        - key: nvidia.com/gpu
-          operator: Exists
       containers:
-        - name: service-nlp-embedding
-          image: cognigy.azurecr.io/service-nlp-embedding:1818e4095014bf2324d88d360078ff0daccd1e08
+        - name: service-nlp-embedding-xx
+          image: cognigy.azurecr.io/service-nlp-embedding-xx:458b2e4f6ceb9f8eda91a0b68f8ad255c1b8f030
           args:
             - tritonserver
             - '--model-repository=/models'
             - '--model-control-mode=explicit'
-            - '--load-model=usev4'
             - '--load-model=usev3'
-            - '--load-model=labse'
             - '--strict-readiness=true'
             - '--backend-config=tensorflow,version=2'
             - '--response-cache-byte-size=0'
@@ -37,16 +32,14 @@ spec:
             - '--allow-vertex-ai=false'
           resources:
             requests:
-              cpu: 4
-              memory: 8Gi
+              cpu: 1
+              memory: 1.2Gi
             limits:
-              cpu: 4
-              memory: 10Gi
+              cpu: 2
+              memory: 2Gi
           ports:
             - name: http
               containerPort: 8000
-            - name: grpc
-              containerPort: 8001
             - name: metrics
               containerPort: 8002
           startupProbe:
@@ -63,5 +56,13 @@ spec:
             periodSeconds: 60
             timeoutSeconds: 10
             initialDelaySeconds: 90
+          volumeMounts:
+            - name: model-config
+              mountPath: /models/usev3/config.pbtxt
+              subPath: usev3-config
+      volumes:
+        - name: model-config
+          configMap:
+            name: embedding-model-config
       imagePullSecrets:
         - name: cognigy-registry-token

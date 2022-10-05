@@ -100,3 +100,6 @@ data:
   # FEATURE_ENABLE_VOICEGATEWAY_2_WHITELIST
   # VOICE_TEST_CALL_API_SECRET
   # JWT_SECRET
+
+  # Path to files containing pre-computed noise embeddings
+  NLP_PRECOMPUTED_EMBEDDINGS_PATH: "/embedding/precomputed_embeddings"
