@@ -53,9 +53,9 @@ spec:
             timeoutSeconds: 10
             initialDelaySeconds: 90
           volumeMounts:
-          - name: model-config
-            mountPath: /models/labse/config.pbtxt
-            subPath: labse-config
+            - name: model-config
+              mountPath: /models/labse/config.pbtxt
+              subPath: labse-config
       volumes:
         - name: model-config
           configMap:
