@@ -1,3 +1,7 @@
+# 4.36.1
+## Cognigy.AI / Cognigy Insights (core)
+The referenced container images have changed.
+
 # 4.36.0
 
 ## Cognigy.AI / Cognigy Insights (core)
