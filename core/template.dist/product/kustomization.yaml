@@ -49,7 +49,6 @@ resources:
 - manifests/deployments/service-analytics-collector.yaml
 - manifests/deployments/service-analytics-conversations.yaml
 - manifests/deployments/service-analytics-odata.yaml
-- manifests/deployments/service-analytics-realtime.yaml
 - manifests/deployments/service-analytics-reporter.yaml
 - manifests/deployments/service-api.yaml
 - manifests/deployments/service-custom-modules.yaml
