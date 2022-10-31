@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clamd
+  name: clamd  
 spec:
   selector:
     matchLabels:
@@ -12,72 +12,30 @@ spec:
       labels:
         app: clamd
     spec:
-      volumes:
-        - name: host
-          hostPath:
-            path: /
-        - name: clamdb
-          emptyDir: null
-        - name: etc
-          configMap:
-            name: clamav
-      initContainers:
-        - name: init
-          image: filefrog/clamav:latest
-          imagePullPolicy: Always
-          command:
-            - /clamav
-            - seed
-          volumeMounts:
-            - name: etc
-              mountPath: /etc/clamav
-              readOnly: true
-            - name: clamdb
-              mountPath: /var/lib/clamav
-              readOnly: false
       containers:
-        - name: clamd
-          image: filefrog/clamav:latest
+        - name: clamd          
+          image: cognigy.azurecr.io/clamav:0.105
           resources:
             limits:
               cpu: 1000m
-              memory: 1700Mi
+              memory: 4000Mi
             requests:
               cpu: 800m
-              memory: 1400Mi
+              memory: 3000Mi
           imagePullPolicy: Always
-          command:
-            - /clamav
-            - clamd
-          securityContext:
-            capabilities:
-              add:
-                - SYS_ADMIN
-                - SYS_PTRACE
+          ports:
+            - containerPort: 3310
           readinessProbe:
             periodSeconds: 3
             tcpSocket:
               port: 3310
           volumeMounts:
-            - name: etc
-              mountPath: /etc/clamav
-              readOnly: true
-            - name: host
-              mountPath: /host
-              readOnly: true
-            - name: clamdb
-              mountPath: /var/lib/clamav
+            - name: clamav-config
+              mountPath: /etc/clamav              
               readOnly: false
-        - name: freshclam
-          image: filefrog/clamav:latest
-          imagePullPolicy: Always
-          command:
-            - /clamav
-            - freshclam
-          volumeMounts:
-            - name: etc
-              mountPath: /etc/clamav
-              readOnly: true
-            - name: clamdb
-              mountPath: /var/lib/clamav
-              readOnly: false
+      volumes: 
+        - name: clamav-config
+          configMap:
+            name: clamav      
+      imagePullSecrets:
+        - name: cognigy-registry-token

@@ -19,11 +19,3 @@ spec:
     name: websecure
     targetPort: "websecure"
     protocol: TCP
-  - port: 8080
-    name: admin
-    targetPort: 8080
-    protocol: TCP
-  - port: 9000
-    name: traefik
-    targetPort: 9000
-    protocol: TCP
