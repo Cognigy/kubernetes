@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-nlp-embedding-en
-          image: cognigydevelopment.azurecr.io/service-nlp-embedding-en:4b1d691503c9925338ba951e2408c6f9c41c517a
+          image: cognigy.azurecr.io/service-nlp-embedding-en:e0584e4af88a88ea3136cb9be0340285484c852f
           args:
             - tritonserver
             - '--model-repository=/models'
