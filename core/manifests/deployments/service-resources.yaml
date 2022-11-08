@@ -23,6 +23,8 @@ spec:
               cpu: '0.5'
               memory: 512M
           ports:
+            - name: health
+              containerPort: 8001
             - name: metrics
               containerPort: 8002
           envFrom:

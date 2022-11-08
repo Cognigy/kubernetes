@@ -23,6 +23,8 @@ spec:
               cpu: '0.3'
               memory: 512M
           ports:
+            - name: health
+              containerPort: 8001
             - name: metrics
               containerPort: 8002
           volumeMounts:
@@ -40,11 +42,14 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
           livenessProbe:
-            exec:
-              command:
-                - node
-                - /opt/healthcheck.js
+            httpGet:
+              path: /health/liveness
+              port: 8001
             failureThreshold: 3
             initialDelaySeconds: 90
             periodSeconds: 60
