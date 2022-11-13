@@ -110,6 +110,7 @@ resources:
 # configmaps
 - manifests/config-maps/redis.yaml
 - manifests/config-maps/redis-persistent.yaml
+- manifests/config-maps/cognigy-rabbitmq-config.yaml
 
 # services
 - manifests/services/stateful-mongo-server.yaml
@@ -165,6 +166,7 @@ resources:
 # configmaps
 - manifests/config-maps/redis.yaml
 - manifests/config-maps/redis-persistent.yaml
+- manifests/config-maps/cognigy-rabbitmq-config.yaml
 
 # services
 - manifests/services/stateful-mongo-server.yaml

@@ -37,5 +37,17 @@ spec:
                     secretKeyRef:
                         name: cognigy-rabbitmq
                         key: rabbitmq-password
+              volumeMounts:
+              - name: configuration
+                mountPath: /etc/rabbitmq/conf.d/rabbitmq.conf
+                subPath: rabbitmq.conf
+            volumes:
+            - name: configuration
+              configMap:
+                  name: cognigy-rabbitmq-config
+                  items:
+                  - key: rabbitmq.conf
+                    path: rabbitmq.conf
+                  defaultMode: 0644
             imagePullSecrets:
             - name: cognigy-registry-token
