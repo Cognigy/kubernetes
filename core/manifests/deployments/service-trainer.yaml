@@ -33,6 +33,10 @@ spec:
           env:
             - name: FEATURE_USE_NEW_PAGINATION_PLUGIN
               value: 'true'
+            - name: REDIS_ENABLE_RECONNECT
+              value: 'true'
+            - name: RABBITMQ_ENABLE_RECONNECT
+              value: 'true'
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString

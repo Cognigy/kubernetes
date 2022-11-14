@@ -30,6 +30,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: REDIS_ENABLE_RECONNECT
+              value: 'true'
+            - name: RABBITMQ_ENABLE_RECONNECT
+              value: 'true'
           volumeMounts:
             - name: rabbitmq-connection-string
               mountPath: /var/run/secrets/rabbitmqConnectionString

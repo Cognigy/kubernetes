@@ -27,6 +27,11 @@ spec:
               containerPort: 8001
             - name: metrics
               containerPort: 8002
+          env:
+            - name: REDIS_ENABLE_RECONNECT
+              value: 'true'
+            - name: RABBITMQ_ENABLE_RECONNECT
+              value: 'true'
           volumeMounts:
             - name: flow-modules
               mountPath: /app/flowModules
