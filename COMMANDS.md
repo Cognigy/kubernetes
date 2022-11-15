@@ -31,7 +31,7 @@ kubectl create secret docker-registry cognigy-registry-token \
 **Creating random secrets for Kuberentes**
 ```
 cd kubernetes.git/core/<environment>/product
-wget https://github.com/Cognigy/kubernetes-tools/releases/download/v2.0.0/initialization-linux
+wget https://github.com/Cognigy/kubernetes-tools/releases/download/v2.2.0/initialization-linux
 chmod +x ./initialization-linux
 ./initialization-linux --generate
 ```
@@ -508,13 +508,33 @@ kubectl create configmap theme-ms-icon-310x310 --from-file favicon/ms-icon-310x3
 
 ---
 ## Chapter 5, Updating
-### 5.2 Retrieving the update
-**Make local repository current**
-```
+### 5.1 Update the version of cognigy-ai
+```bash
+cd kubernetes
 git fetch origin
-git checkout tags/v4.0.0
+# Checkout the tag corresponding to the version you want to update, here as example we use v4.38.0
+git checkout tags/v4.38.0
+cd core
+# Retrive the proper manifest files corresponding to the version
+./make_environment.sh development # Make sure to replace the "development" folder with the proper folder name if you are using any other name rather than "development"
+cd development/product
+kubectl apply -k ./
 ```
+### 5.2 Update the configmap
 
+- Add or update the environment variables in `kubernetes/core/development/product/overlays/config-maps/config-map_patch.yaml`
+- Apply the change in the cluster
+  ```bash
+  cd kubernetes/core/development/product
+  kubectl apply -k ./
+  ```
+- Restart all `cognigy-ai` pods to get the changes of config map. Here we consider that `cognigy-ai` is running in `default` namespace, replace the `default` namespace if you are using other namespace
+  ```bash
+  for i in $(kubectl get deployment --namespace default --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}'|grep service-)
+  do
+      kubectl --namespace default rollout restart deployment $i
+  done
+  ```
 ---
 ## Chapter 6, Cognigy Live Agent
 ### 6.2.2 Using templates

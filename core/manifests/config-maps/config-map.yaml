@@ -103,3 +103,6 @@ data:
 
   # Path to files containing pre-computed noise embeddings
   NLP_PRECOMPUTED_EMBEDDINGS_PATH: "/embedding/precomputed_embeddings"
+
+  
+  # FEATURE_ENABLE_YES_NO_INTENTS: true
