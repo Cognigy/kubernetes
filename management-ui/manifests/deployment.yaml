@@ -14,7 +14,7 @@ spec:
         spec:
             containers:
             - name: management-ui
-              image: cognigy.azurecr.io/management-ui:8970cf782f738b9e9ec10dcbaafd10cdac1fdcc2
+              image: cognigy.azurecr.io/management-ui:f4586ce52e4089e8c074257c22b85b4f4847288f
               resources:
                 limits:
                     memory: "30Mi"

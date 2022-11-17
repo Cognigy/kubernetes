@@ -1,3 +1,9 @@
+# 4.39.1
+
+## Cognigy.AI
+
+The referenced container images for Cognigy.AI have changed.
+
 # 4.39.0
 
 **Important announcement**
