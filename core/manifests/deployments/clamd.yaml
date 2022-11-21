@@ -13,7 +13,7 @@ spec:
         app: clamd
     spec:
       containers:
-        - name: clamd          
+        - name: clamd
           image: cognigy.azurecr.io/clamav:0.105
           resources:
             limits:
@@ -31,11 +31,11 @@ spec:
               port: 3310
           volumeMounts:
             - name: clamav-config
-              mountPath: /etc/clamav              
+              mountPath: /etc/clamav
               readOnly: false
       volumes: 
         - name: clamav-config
           configMap:
-            name: clamav      
+            name: clamav
       imagePullSecrets:
         - name: cognigy-registry-token
