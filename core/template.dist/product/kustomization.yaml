@@ -16,6 +16,7 @@ resources:
 - manifests/services/service-insights-ui.yaml
 - manifests/services/clamd.yaml
 - manifests/services/service-runtime-file-manager.yaml
+- manifests/services/service-collector.yaml
 
 # nlp deployments
 # for languages: de-DE
@@ -75,6 +76,7 @@ resources:
 - manifests/deployments/service-webchat.yaml
 - manifests/deployments/service-insights-api.yaml
 - manifests/deployments/service-insights-ui.yaml
+- manifests/deployments/service-collector.yaml
 
 # reverse proxy
 - manifests/reverse-proxy/deployments/traefik.yaml
