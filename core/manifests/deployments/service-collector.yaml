@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-collector
+spec:
+  selector:
+    matchLabels:
+      app: service-collector
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: service-collector
+    spec:
+      containers:
+        - name: service-collector
+          image: cognigydevelopment.azurecr.io/service-collector:main-1fe7860-1666351355
+          resources:
+            requests:
+              cpu: '0.300'
+              memory: 160M
+            limits:
+              cpu: '0.300'
+              memory: 200M
+          ports:
+            - name: metrics
+              containerPort: 8002
+          envFrom:
+            - configMapRef:
+                name: cognigy-env
+          env:
+            - name: INSIGHTS_COLLECTOR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-insights-collector-api-key
+                  key: secret
+          volumeMounts:
+            - name: rabbitmq-connection-string
+              mountPath: /var/run/secrets/rabbitmqConnectionString
+              subPath: rabbitmqConnectionString
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8001
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8001
+            failureThreshold: 3
+            initialDelaySeconds: 90
+            periodSeconds: 60
+            timeoutSeconds: 10
+      volumes:
+        - name: rabbitmq-connection-string
+          secret:
+            secretName: cognigy-rabbitmq
+            items:
+              - key: connection-string
+                path: rabbitmqConnectionString
+      imagePullSecrets:
+        - name: cognigy-registry-token
