@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-resources
-          image: cognigy.azurecr.io/service-resources:8675f5d47769b49347acea8b5ef0a24d6ecfb124
+          image: cognigy.azurecr.io/service-resources:4bc237db960cadbc4dbe85e9af82c945dd844d7b
           resources:
             requests:
               cpu: '0.2'
@@ -23,6 +23,8 @@ spec:
               cpu: '0.5'
               memory: 512M
           ports:
+            - name: health
+              containerPort: 8001
             - name: metrics
               containerPort: 8002
           envFrom:

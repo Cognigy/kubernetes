@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-webchat
-          image: cognigy.azurecr.io/service-webchat:d5ffa7f35281b4f6507995c8a22099b6c57b15dd
+          image: cognigy.azurecr.io/service-webchat:4bc237db960cadbc4dbe85e9af82c945dd844d7b
           resources:
             requests:
               cpu: '0.1'
@@ -23,11 +23,18 @@ spec:
               cpu: '0.3'
               memory: 150M
           ports:
+            - name: health
+              containerPort: 8001
             - name: metrics
               containerPort: 8002
           envFrom:
             - configMapRef:
                 name: cognigy-env
+          env:
+            - name: REDIS_ENABLE_RECONNECT
+              value: 'true'
+            - name: RABBITMQ_ENABLE_RECONNECT
+              value: 'true'
           volumeMounts:
             - name: redis-password
               mountPath: /var/run/secrets/redis-password.conf

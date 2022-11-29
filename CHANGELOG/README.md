@@ -1,4 +1,5 @@
 # Changelogs
+- [v4.40](./CHANGELOG-4.40.md)
 - [v4.39](./CHANGELOG-4.39.md)
 - [v4.38](./CHANGELOG-4.38.md)
 - [v4.37](./CHANGELOG-4.37.md)
