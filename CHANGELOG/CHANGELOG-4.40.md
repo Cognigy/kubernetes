@@ -9,7 +9,7 @@ With release `4.30.0` we have started to mark this repository as `deprecated`. I
 
 The referenced container images have changed.
 
-## Stateful services
+### Stateful services
 To improve the functionality and fix known security vulnerabilities in the dependencies Cognigy.AI/Cognigy Insights uses, we have updated the RabbitMQ from `v3.9.20` to `v3.9.24`.
 
 In this release we have added the option to use custom config file for RabbitMQ. This will allow us to set custom value for memory high watermark for example. Before deploying the new RabbitMQ please deploy the following ConfigMaps that contains the content of the custom configuration of RabbitMQ.
@@ -46,3 +46,18 @@ do
 kubectl --namespace <target_namespace> rollout restart deployment $i
 done
 ```
+
+### Configmap change
+In case you are already using the `call capabilities within the Cognigy.AI Interaction Panel`, you have to make sure that you change the following ENV variable in your `config-map_patch` file:
+```
+VOICE_GATEWAY_PREPARE_CALL_API
+```
+
+change the current value from: `/api/v1/call/prepare` to: `/api/v2/call/prepare`.
+
+In addition, you have to set the following additional ENV variable so `Cognigy Live Agent` will be able to display attachments that have been uploaded through Cognigy.AI endpoints:
+```
+RUNTIME_FILE_MANAGER_BASE_URL_WITH_PROTOCOL
+```
+
+the value should be at least set to the `frontend DNS name` of the `Cognigy Live Agent` installation - an example value would be: `https://dev-live-agent.cognigy.ai`
