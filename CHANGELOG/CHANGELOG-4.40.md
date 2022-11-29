@@ -57,7 +57,7 @@ change the current value from: `/api/v1/call/prepare` to: `/api/v2/call/prepare`
 
 In addition, you have to set the following additional ENV variable so `Cognigy Live Agent` will be able to display attachments that have been uploaded through Cognigy.AI endpoints:
 ```
-RUNTIME_FILE_MANAGER_BASE_URL_WITH_PROTOCOL
+RUNTIME_FILE_MANAGER_CORS_WHITELIST
 ```
 
 the value should be at least set to the `frontend DNS name` of the `Cognigy Live Agent` installation - an example value would be: `https://dev-live-agent.cognigy.ai`
