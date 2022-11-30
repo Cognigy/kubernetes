@@ -49,6 +49,11 @@ spec:
                 secretKeyRef:
                   name: cognigy-live-agent-credentials
                   key: cognigy-live-agent-platform-token
+            - name: SERVICE_ENDPOINT_API_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-service-endpoint-api-access-token
+                  key: api-access-token
             - name: REDIS_ENABLE_RECONNECT
               value: 'true'
             - name: RABBITMQ_ENABLE_RECONNECT
