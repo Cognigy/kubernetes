@@ -10,4 +10,6 @@ With release `4.30.0` we have started to mark this repository as `deprecated`. I
 The referenced container images have changed.
 
 ### Core (Cognigy.AI)
-We have introduced a new Kubernetes secret which you have to apply to your Kubernetes cluster. The secret is called `cognigy-service-endpoint-api-access-token.yaml` and located under `core/template.dist/product/secrets.dist`. We suggest copying this file from the `secrets.dist` folder into your `secrets` folders. The secret value can be a base64 encoded 16 bytes of random hex value.
+We have introduced a new Kubernetes secret which you have to apply to your Kubernetes cluster. The secret is called `cognigy-service-endpoint-api-access-token.yaml` and is located under `core/template.dist/product/secrets.dist`. You have to copy the template file from `secrets.dist` into your `secrets` folder and provide a value. Please use a secure (random) value and remember that you have to base64 encode it.
+
+**Important: Skipping this step is not possible and will lead to service-endpoint not starting properly! Make sure that you prepare the secret & apply it to your cluster before you proceed with the actual upgrade!**
