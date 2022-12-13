@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-parser
-          image: cognigy.azurecr.io/service-parser:d6bc9907575ff5d79599d84f654be3359eac58d2
+          image: cognigy.azurecr.io/service-parser:64216f21879de761fff49fdcd61721a4e2d7e773
           resources:
             requests:
               cpu: '0.1'

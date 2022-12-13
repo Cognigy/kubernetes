@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-endpoint
-          image: cognigy.azurecr.io/service-endpoint:c686e3f73d21c77f69d5b0f2f28ecd7a92efea24
+          image: cognigy.azurecr.io/service-endpoint:ccebb3e0f736f4654657720cec4272828c73fc2b
           resources:
             requests:
               cpu: '0.2'
@@ -49,6 +49,11 @@ spec:
                 secretKeyRef:
                   name: cognigy-live-agent-credentials
                   key: cognigy-live-agent-platform-token
+            - name: SERVICE_ENDPOINT_API_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cognigy-service-endpoint-api-access-token
+                  key: api-access-token
             - name: REDIS_ENABLE_RECONNECT
               value: 'true'
             - name: RABBITMQ_ENABLE_RECONNECT

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-collector
-          image: cognigy.azurecr.io/service-collector:release-f23dc74-1669026466
+          image: cognigy.azurecr.io/service-collector:release-974e727-1670235190
           resources:
             requests:
               cpu: '0.300'
